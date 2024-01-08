@@ -34,6 +34,8 @@ create database namadatabasenya;
 //todo ini untuk menghapus database nya
 drop database namadatabasenya;
 
+//todo ini untuk memilih database
+use namadatabasenya;
 
 
 

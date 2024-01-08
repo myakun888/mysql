@@ -1,0 +1,9 @@
+MySQL adalah dbms yang paling populer saat ini dan opensourh dan gratis untuk digunakan
+
+mysql dibuat tahun 1995 oleh david axmark dan michael widenius
+mysql sangat populer terutama di kalangan programer php, karena mysql dan php terintgrasi dengan baik
+
+mysql dan mariadb
+
+itu senarnya sama karen setelah keluar dari mysql para pendiri nya mendirikan mariadb
+jadi sql atau perintah queri nya sebagian besar sama

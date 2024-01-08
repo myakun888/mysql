@@ -1,0 +1,41 @@
+database adalah tempata menyimpan tabel tabel dari mysql
+
+jika kita asumsikan tabel tabel dalam mysql itu adalah file, maka database adalah folder dari file file tersebut dimana kita menyimpan file file didalam foldernya
+
+
+
+//! kita akan mencoba akses mysql dari cmd
+
+
+pastikan server berjalan
+
+lalu
+ketik di cmd ny
+
+(keterngan -uroot adalah nama master nya, -p adalah pasword ny, jika psword ny kosongkan saja , jika ad maka di isi)
+
+//todo         
+mysql -uroot -p    
+
+
+
+
+//!penting
+mysql incase senstif artinya tidak peduli huruf besar atau kecil
+setiap diakir queri / atau perintah wajib menutup dengan titik koma ;
+
+
+//todo ini adalah perintah untuk menampilkan semua database nya
+show databases;
+
+//todo ini untuk membuat database nya
+create database namadatabasenya;
+
+//todo ini untuk menghapus database nya
+drop database namadatabasenya;
+
+
+
+
+
+//tod 

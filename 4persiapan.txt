@@ -1,0 +1,3 @@
+//! pastikan sudah dowload mysql sesuai yang anda mau, baik di xampp atau mysql
+pastikan saat jalan hanya satu karena akan bentrok jika keduanya berjalan
+danjuga jangan lupa seting env(envirotmet nya agar berjalan atau bisa kita akses di cmd )

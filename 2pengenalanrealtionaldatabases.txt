@@ -1,0 +1,6 @@
+ada banyak sekali dbms diantaranya relational database, document database, key-value database
+relational db (mysql, postgre oracle dll), document db (mongo db), ke-value(redis)
+
+mengapa relational database? untuk pemula atau awan kita lebih direkemdasikan belajar mengguanakn relational database, karena kita relational ini memikili konsep tabulasi (tabel), seperti ms excel jadi kita lebih familiar
+
+selain itu relational database perintah standart menggunakan SQL (struktur queri language), sehingga kita bisa lebih mudah ketika berganti ganti aplikasi relational database seperti mysql, postgreSQL, oracle dll

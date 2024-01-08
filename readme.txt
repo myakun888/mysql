@@ -1,0 +1,1 @@
+//! dimateri ini kita belajara mysql dari cara install dan queri quri nya

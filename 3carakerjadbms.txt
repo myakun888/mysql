@@ -1,0 +1,28 @@
+cara kerja dbms itu
+
+databaseclient ------------> dbms -----------------> databasefile
+
+
+databaseclient itu dbuat dari aplksi java atau php dll
+ //!donwload di xampp
+contoh saat kita menginstal mysql dari xampp kita akan mendapatkan (otomatis dapat)
+xampp sebagai server dan phpmyadmin sebagai client database ny (php admin dbuka dibrowser nya)
+
+
+//! donwload di mysql comutiy , silahkan lihat tutorial
+jika di mysql
+saat kita menginstal mysql comunity 
+kita mendapatkan mysqlcomnty sebgai server  ( donwload secara terpisah) 
+dan mysql workbanch sebagai client database
+
+
+
+//!database client
+jadi databaseclient adalah tampilan antarmuka yang digunakn oleh client untuk mengelola database ny, slain mengunakn tampilan ui ny secara default kita bisa mengakses database dengan cmd 
+
+//! database file
+secara umum database menyimpan database nya di file, meskipun ada beberpa yang di simpan di dalam memory
+
+//! SQL
+structured query language
+adalah bahasa yang digunakan untuk mengirim perintah ke dbms nya

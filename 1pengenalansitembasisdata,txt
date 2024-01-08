@@ -1,0 +1,6 @@
+DBMS ?
+adalah database manajemen sistem, jika kita tidak menggunakan dbms biasan ny kita menggunakan file excel untuk mengelola data,file, folder yang berhubgan dengan data,
+
+DBMS biasanya berjalan sebagai server yang berguna untuk mengelola data, jadi kita hanya mengunakan atau membuat perintas(queru), kedalam dbms seperti menambahkan, mengubah, menghapus, atau biasa disebut CRUD(creat update,input,delete) 
+
+beberpa dbms yang populer, MySQL, postgre SQL, mongo DB , oracle dan lain lain

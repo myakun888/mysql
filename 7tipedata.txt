@@ -1,0 +1,60 @@
+//! TIPE DATA
+mysql memilki tipe data
+jadi kita bisa menentukan tipedata apa yang akan kita buat saat membuat tabel mysql, tiap kolom dari tabel hanya berlaku satu tipe data, misal kolom id tipe data nya integer, maka di dalam itu berisi wajib integer dan seterusnya
+
+//! TIPE DATA NUMBER
+secara garis besar tipe data number di mysql terbagi menjadi integer dan floating point
+integer adalah bilangan bulat dan float adalah pecahan
+   --untuk integer terbagi beberapa tipe yang membedakan hanya panjang byte(kapasitas penyimpanan di dalam file) dan maximum angka nya diantaranya tiytint, smallint, mediumint, int dan bigint , *silahkan lihat di dokumentasinya
+
+   --untuk floating point
+   angka float dan double, perbedaan nya diantranya size kapasitas dan minimun dan maximum panjang jumlahnya
+
+TODO , NOTE, biasa nya tipe data number yang di pakai jika <=2M memakai INT, jika >2M memakai BIGINT
+
+  //! decimal
+    selain integer mysql memiliki tipe data decimal, ini tipe data kusus yang bisa kita tentukan jumlah presisi dan scale ny
+contoh 
+decimal(5,2) artinya jumlah angka nya 5 dan angak di belakang koma ny 2 contoh min -999,99  max 999,99 
+decimal(5,0) artinya jumlah angka nya 5 dan angak di belakang koma ny 0 contoh -99999 max 99999
+decimal(3,1) artinya jumlah angka nya 3 dan angak dibelakang koma nya 2 contoh -99,9 max 99,9
+
+   //! tipe data attribute
+   type(n), artinya jumlah angka yang akan di tampilkan
+   zerofill, artinya angka nol akan di tampiklan sebelum angka inti nya contoah int(3), jika kita menulis 7, maka akan tampil 007
+
+//! TIPE DATA, STRING
+didalam string atau text mysql memilki beberpa tipe data , char , varchar, text dan enum
+   * char dan varchar, perbedaan nya ada pada size storge nym, untuk jumlah karakternya keduanya sama yaitu maximal 65636
+cotoh char(10) , varchar(10), artinya char dan varchar yang kita buat maximun menampung 10 carakter
+
+   *text, berbeda dengan text , text tidak bisa kita tentukan panjang ny text sendiri terbagi menjadi beberapa bagian
+      - TINYTEXT 255carakter (~256byte)
+      - TEXT 65535 carakter (~64byte)
+      - MEDIUMTEXT 16777215 carakter (~16mb)
+      - LONGTEXT 4294967295 carakter (~04gb)
+//! tips jadi kita bisa gunakn tipe data string sesuai yang kita perlukan dengan karakter ny masing masing
+
+   * enum enum adalah tipe data text yang bisa kita tentukan pilihanya contoh seperti pria atau wanita, menikah atau belum menikah
+contoh
+enum('pria','wanita') artinya pilihanya pria atau wanita
+enum('rupiah','dollar','reyal') artinya pilihanya rupiah, dollar, riyal
+
+
+
+//! TIPE DATA, DATE AND TIME
+tipe data date adalah tipe data waktu, kita bisa menyimpan data dalam bentuk string tp ini tidak direkomendasikan karena sudah ada tipe nya masing masing
+
+   -- date ,         YYYY-MM-DD    contoh 2022-10-10
+   -- datetime,      YYYY-MM-DD HH:MM:SS   contoh 2022-10-10 10:10:10
+   -- timestamp      YYYY-MM-DD HH:MM:SS   contoh 2022-10-10 10:10:10
+   -- time           HH:MM:SS  contoh 10:10:10
+   -- years          YYYY contoh 2022
+
+
+//! TIPE DATA BOOLEAN
+adalah tipe data yang mempresentasikan benar atau salah
+benar untuk TRUE dan salah untuk FALSE
+
+//! TIPE DATA LAIN LAIN
+masih banyak tipe data lainya misalnya tipe data BLOB, SPATIAL, JSON, SET dll 

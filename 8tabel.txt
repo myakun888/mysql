@@ -1,0 +1,91 @@
+//! TABEL
+
+tabel didalam mysql itu mempresentasikan file, di dalam tabel ini kita akan membuat kolom dan setiap kolom kita bisa tentukan tipe data dari setiap kolom nya, sesuai yang akan kita gunakan
+tabel biasa nya menyimpan satu jenis data misal dalam study kasus aplikasi toko online, kita akan membuat tabel barang , tabel pelanggan, tabel penjual dan lain lain
+
+//! storage engine
+mysql memiliki beberapa jenis penyimpanan untuk mengolah database, yang paling populer yaitu innoDB
+ada banyak jenis penyimpanan yang di suppport dari mysql diantaranya 
+   -csv (untuk data dalam excel)
+   -innodb
+   -dll
+untuk melihat engine yang di support dari mysql kita bisa melakukan perintah berikut
+//todo 
+   show engines;
+
+
+
+//! untuk melihat tabel 
+//todo 
+show tables;
+
+jika ada akan menampilkan tabel nya jika tidak makan akan "empety set"
+
+
+
+//! membuat tabel
+membuta tabel itu 
+
+//todo 
+create table namatabel ( namakolom tipedata, namakolom tipedata, namakolom tipedata, ) engine= namaengine
+
+contoh
+create table barang ( kode int , namabarang varchar(100), harga int, jumlah int )engine = innodb
+
+untuk engine jika tidak di isi secara default nya itu innodb
+
+   //! melihat struktur tabel
+   //todo
+   describe namatabel; atau desc namatabel; atau show create table namatabel;
+
+
+
+//! mengubah tabel
+ada beberap metod y, ini memiliki fungsi masing masing
+
+//todo 
+alter table namatabel fungsinya;
+
+fungsinya sebagai berikut
+   ADD COLUMN nama_column TIPEDATA;            ---> ini untuk menambah colum
+   DROP COLUMN nama_columm;         ----> mengahapus colum
+   CHANGE nama_column namabaru_column TIPEDATA;   ----> mengubah namacolum
+   MODIFY namacolumn TIPEDATA AFTER columnlain;   ----> memindahkan/ mengubah posisi kolum ke setelah columnlain
+   MODIFY namacolumn TIPEDATA FIRST; ---> memindahkan / mengubah posisi tabel kedepan  
+
+contoh;
+alter table barang add namabarang varchar(100)    ---> ini contoh perintah menambahkan kolom namabarang di tabel barang;
+
+
+jika ingin seklian satu eksekusi bisa langsung digabung dengan menambahkan tanda koma (,) lalu di tutup dengan titik koma ;
+contoh
+
+alter table barang add column id int , drom column nmorbarang ;    --> ini artinya menambahkan colom id dan mengahapus kolom nomor barang di tabel barang dalam sekali eksekusi / berbarengan
+
+
+
+
+//! null value
+
+null value adalah nilai yang akan di isi ketika kita tidak mengisi nilainya ini bisa kita seting pada saat membuat tabel nya, jika kita membuat not null artinya kolom nilai tersebut wajib di isi
+
+
+
+//! default value
+adalah nilai bawaan yang akan kita isi jika kita tidak mengisikan nilai pada kolom tersbut, jika kita tidak ingin nilai nya null pada saat tidak diisi melainkan kita ingin mengisi nilai yang sudah kita tentukan maka tentukan nilai devault value nya
+kecuali untuk tipe data DATE TIME atau TIMESTAMP default value nya hanya bisa di isi dengan current time stamp (waktu saat ini)
+
+
+
+//! membuat ulang tabel atau mengahpus semua isi data di dalam kolomnya. tp tabel nya tidak dihapus
+
+//todo
+ TRUNCATE namatabel;
+ contoh:
+TRUNCATE barang;
+
+//! menghapus tabel , beserta isi nya, data dan tipe datanya
+//todo
+DROP table namatabel;
+contoh
+DROP table barang;

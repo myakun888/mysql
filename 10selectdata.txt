@@ -1,0 +1,31 @@
+! SELECT DATA
+select data gunanya untuk menampilkan data yang kita pilih dari tabel tertentu
+berikut querinya
+
+ ! untuk melihat semua isi dari tabel
+ //todo   arti * adalah  semuanya / all
+ SELECT * FROM NAMATABEL;
+
+
+   contoh
+   select * from pembeli;
+ artinya melihat semua value data di dalam tabel pembeli
+
+
+! menampilkan data berdasarkan kolom tertentu
+//todo
+SELECT NAMACOLUM, NAMACOLUMN FORM NAMATABEL;
+   contoh
+   select id, nama from pembeli;
+artinya melihat / menampilkan colum id dan nama pada tabel pembeli
+
+
+! untuk melihat data berdasarkan kriteria terntentu gunakan where clause (akan di bahas di materi tersendiri)
+//todo
+
+SELECT * FROM NAMATABEL WHERE colum = value
+
+contoh
+select * from pembeli where id = 1;
+
+artinya menampilkan semua data kolom pada tabel pembeli dari data yang memiliki id 1

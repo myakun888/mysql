@@ -1,0 +1,30 @@
+//! INSERT DATA
+adalah perintah untuk memasukan data kedalam tabel
+
+queri / perintahnya adalah sebagai berikut
+saat memasukan data kita akan menyebutkan nama kolom nya dan akan di di isi value / nilai sesuai urutan dari kolomnya
+, jika kolom nya tidak sebutkan maka nilai dari kolom nya akan di isi null atau default value yang sudah dibuat
+
+ untuk urutan kolom tidak wajib berurutan kita bebas menentukan yang mana lebih dulu, tetapi untuk valuenya harus mengikuti queri yang sudah kita buat di queri insert nya
+//todo
+
+cara1
+INSERT INTO namatabel (namakolom1, namakolom2, namakolom3) 
+VALUES ('nilai1' , 'nilai2', 'nilai3');
+
+artiny nilai1 untuk namakolom1, nilai kolom2 untuk nilaikolom2 dst
+
+cara2
+kita tidak harus membuat kolom tabelnya berati kitahrus sesuai urutan yang kita buat kolomnya di tabel
+
+INSERT INTO namatabel VALUES ('nilai1','nilai2','nilai3');
+
+
+//! untuk memeasukan beberapa data sekaligus 
+
+INSERT INTO namatabel (namakolom1, namakolom2, namakolom3) 
+VALUES   ('nilai1a' , 'nilai2a', 'nilai3a'),
+         ('nilai1b' , 'nilai2b', 'nilai3b'),
+         ('nilai1c' , 'nilai2c', 'nilai3c');
+
+   kita cukup menambahkan koma dan masukan kembali data nya, artinya queri diatas dalam satu kali queri itu memasukan 3 data;

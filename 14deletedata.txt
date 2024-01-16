@@ -1,0 +1,18 @@
+! DELETE data
+ DELETE data adalah operasi crud yang berguna untuk menghapus data,
+ penggunaannya sama seperti update kita menggunakan where clasue untuk menspesipikan data mana yang akan dihapus, hati hati karena jika tidak spesifik bisa semua colum atau tabel akan terhapus kecuali untuk kasusu tertentu yang memang bertujuan untuk mengahpus semua isi tabel nya
+
+
+
+
+ //todo
+   DELETE FROM NAMATABEL where namacolum = valuenya
+ 
+ contoh 
+
+   DELETE from asetkendaraan where id = 8;
+   artinya delete dari tabel asetkendaraan dengan id yang bernilai /value nya sama dengan 8
+
+
+//! untuk delet colum kita bisa menggunakan perintah di alter table
+ALTER TABLE namatabel DROP namacolum;

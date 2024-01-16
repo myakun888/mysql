@@ -1,0 +1,24 @@
+! WHERE CLAUSE
+
+sedah sedikit kita bahas di materi select y ini
+
+ini kita lebih detail lagi
+saat kita ingin mengambil data secar spesifik misalnya di dalam tabel itu ada data nilai antara 100-1000 kita ingin mengambil yang seribu maka kita bisa menggunakan where clase ini
+
+//todo
+select * from namatabel where colom = value
+
+   contoh 1
+   select * from reseller where jumlah = 1000
+   artinya
+c  ari pilih / tampilkan semua tabel yang memiliki value jumlah 1000
+
+   contoh 2 
+   select * from reseller where asal = 'indonesia';
+artinya memilih barang di tabel reseller dengan colum yang memiliki value indonesia, maka yang tampil hanya data tabel yang memilki data indonesia
+
+   contoh 3
+   select nama, harga, jumlah from asetkendaraan where nama = 'jazz';
+   artinya mencari colum nama,harga dan jumlah dari tabel asetkendaraan yang memeilki colum dengan value jazz
+
+

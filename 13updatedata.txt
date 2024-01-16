@@ -1,0 +1,28 @@
+//! UPDATE 
+
+update terbagi menjadi 2 
+1. untuk value dari sebuah kolom
+2. untuk struktur sebuah kolom
+
+1.update value dari sebuah kolom
+
+queri ny
+//todo
+UPDATE namatabel SET columnya = value where namacolumn = value 
+   queri diatas untuk update kolom dengan spesikasi kita tentukan , kita harus menggunakan where clause untuk memberi tahu yang mana yang ingin kita update jika tidak bisa bisa semua columnya terupdate
+
+contoh
+UPDATE asetkendaraan SET harga = 180000000 where id = 3;
+
+artinya update tabel asetkendaraan dan set harga nya menjadi 180000000 , dari sebuh id yang memiliki valuenya 3
+
+
+2. update / mengubah struktur tabel,
+   untuk tabel baik itu update nama, menambah kolom dll kita menggunakan alter tabel, yang sudah di bahas di materi tabel,
+   di sini kita contohke menambah tabel
+
+//todo
+alter table namatabel add column namaclumn tipedata;
+
+alter table asetkendaraan add column warna varchar(50) default 'black';
+artinya tambahkan column warna dengan tipedata varchar, dan default value nya 'hitam'

@@ -24,7 +24,7 @@ jika ada akan menampilkan tabel nya jika tidak makan akan "empety set"
 
 
 //! membuat tabel
-membuta tabel itu 
+membuat tabel itu 
 
 //todo 
 create table namatabel ( namakolom tipedata, namakolom tipedata, namakolom tipedata, ) engine= namaengine

@@ -23,9 +23,10 @@ artinya melihat / menampilkan colum id dan nama pada tabel pembeli
 ! untuk melihat data berdasarkan kriteria terntentu gunakan where clause (akan di bahas di materi tersendiri)
 //todo
 
-SELECT * FROM NAMATABEL WHERE colum = value
+SELECT * FROM NAMATABEL WHERE NAMACOLUMN = VALUE
 
 contoh
 select * from pembeli where id = 1;
 
 artinya menampilkan semua data kolom pada tabel pembeli dari data yang memiliki id 1
+   //*tips menggunakan where gunakan yang data value yang spesifik

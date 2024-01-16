@@ -1,0 +1,43 @@
+! PRIMARY KEY
+
+saat membuat tabel ideal nya kita memiliki PRIMARY KEY
+PRIMARY KEY adalah sebuah colum yg kita tunjuk untuk menjadi id tabel tersebut 
+guna id ini adalah agar menjadi sesuatu yang unik untuk membedakan identitas dari setiap baris di kolom tersebut
+jadi gunakan PRIMARY KEY pada sesuatu yang unik
+contoh jika tabel yang berisi nama,noktp , status
+yang cocok di jadikan PRIMARY key adalah no ktp
+
+atau jika kita membuta tabel yang berisi id, nama, asal
+kita bisa gunakan id yang menjadi PRIMARY key
+
+
+   PRIMARY KEY bisa digunakan untuk lebih dari satu tabel tapi ini hanya pada kasus tertentu misalnya saat relasi tabel many to many
+   lebih utamakan satu primary key untuk satu tabel
+
+
+
+kita bisa membuat primarykey sebagai berikut
+contoh kita membuat tabel baru
+
+ //! membuat primary key saat membuat tabel
+create table cabang (
+   id int(100),
+   nama varchar(60),
+   alamat varchar(60),
+   stock int(1000),
+   PRIMARY KEY (id)
+
+);
+
+ queri diatas artinya kita membuat tabel dengan colum id,nama, lokasi stock dan kita menjadikan id sebagai primary key ny
+
+
+
+//! menambahkan primary key di tabel yang sudah di dbuat
+kita bisa menggunakan alter tabel
+
+//todo
+
+alter table namatabel add primary key (colum);
+   cotoh:
+   alter table reseller add primary key (id)

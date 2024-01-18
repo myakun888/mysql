@@ -1,0 +1,25 @@
+//! LIMIT CLAUSE
+adalah saat kita mencari data / menampilkan data, maka data akan tampil semuanya , jika total ada 1000000 maka semuanya akan tampil
+dari itu pembatasan , kita bisa membatasi sesuai yang kita mau dengan menggunakan limit CLAUSE
+
+//! membatasi hasil queri
+SELECT * FROM NAMATABEL LIMIT jumlahditampilkan
+
+
+contoh 
+
+select * from asetkendaraan limit 5;
+artinya tampilkan semua colom dengan batasan 5 data;
+
+
+
+
+   //! PAGENATION, HALAMAN atau skip hasil queri
+dengan limit clause kita bisa membuat halaman / biasa disebut pagination
+
+select * from namatabel start, limit
+
+contoh
+select * from asetkendaraan 0,5       // ini sama seperti contoh pertama akan menampilkan lima data , dimulai dari 0 , artinya nilainya 0 sampai 5
+select * from asetkendaraan 5,5       // ini artinya dia dimulai dari 5 dan ditampilkan total nya 5, artinya nilai 6 sampe 10
+atau artinya juga menskip / melewatkan 5 angka diawal , lalu menampilkan 5 angka selanjutnya

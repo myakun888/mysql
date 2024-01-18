@@ -17,6 +17,19 @@ UPDATE asetkendaraan SET harga = 180000000 where id = 3;
 artinya update tabel asetkendaraan dan set harga nya menjadi 180000000 , dari sebuh id yang memiliki valuenya 3
 
 
+   //! update data , mengubah dengaan value/nilai di kolom
+
+      kita juga bisa mengupdate dengan value di dalam columnya , mirip di bahasa pemrograman lain, mengunakan augmentid assingmen, atau operasi terhadap dirinya sendiri, tapi hanya berlaku yang seperti ini
+      nilai = nilai + 1; 
+      tidak bisa seperti ini nilai+=1;   --> jika seperti ini ini diangap merubah ke nilai 1
+   contoh menambhakan nilai
+//todo
+   UPDATE NAMATABEL SET columna = columna + 1 where namacolum = valuecolum;
+
+   contoh
+update asetkendaraan set jumlah = jumlah + 1 where nama = 'toyota';
+artinya update data menambah 1 nilai pada colom jumlah dari kolom yang memilki nama dengan value toyota;
+
 2. update / mengubah struktur tabel,
    untuk tabel baik itu update nama, menambah kolom dll kita menggunakan alter tabel, yang sudah di bahas di materi tabel,
    di sini kita contohke menambah tabel
@@ -26,3 +39,5 @@ alter table namatabel add column namaclumn tipedata;
 
 alter table asetkendaraan add column warna varchar(50) default 'black';
 artinya tambahkan column warna dengan tipedata varchar, dan default value nya 'hitam'
+
+

@@ -1,0 +1,144 @@
+//! WHERE OPERATOR
+where operator biasanya digunakan untuk menspesifikan dalam mencari data , update , dan delete data dll
+where operator tidak hanya = (sama dengan), sebelumnya kita sudah menggunakan where operator =, saat menggunakan update dan delete
+masih banyak operator-operator yang di kombinasikan dengan where operator
+diantaranya
+
+*operator PERBANDINGAN
+*operator AND dan OR
+*operator LIKE
+*operator IS NULL
+*operator BETWEEN
+*operator IN
+
+ini akan di bahas satu / satu
+
+
+
+//! OPERATOR PERBANDINGAN
+
+=  samadengan,
+<> atau !=  tidak samadengan,
+<  kurang dari,
+>  lebih dari,
+<= kurang dari atau sama dengan,
+>= lebih dari atau sama dengan,
+
+
+contoh mencari data degan where operator
+
+//todo
+select * from where id <=3;
+ artiya cari semua tabel yang memiliki id kurang atau samadengan 3
+
+
+
+ //! Mencari data dengan OPERATOR AND DAN OR 
+selain memiliki operator perbandingan mysql juga memiliki operator and dan or
+perilaku nya sama seperti bahasa pemrograman pada umumnya
+   //* OPERATOR AND
+   simulasi operator and
+
+   hasil1 operator hasil2 hasilakir
+   true    and     true     true
+   true    and     false    false
+   false   and     false    false
+   false   and     true     false
+
+inti ny untuk operator AND , jika nilai kanan dan kiri nya true maka hasilnya adalah true, selain itu adalah false 
+jadi 22 (kiri dan kanan) harus true, untuk mendapatkan nilai 
+
+
+   contoh
+   select * from asetkendaraan where id <=3 and warna = 'hitam';
+artinya tampilkan semua colomn yang memiliki id kurang dari 3 dan memilki warna hitam;
+
+   //* OPERATOR OR
+   simulasi operator OR
+
+   hasil1 operator hasil2 hasilakir
+   true    OR     true     true
+   true    OR     false    true
+   false   OR     true     true
+   false   OR     false    false
+inti nya untuk operator OR jika salah satu nilai nya true ( baik kanan atau kirinya ) maka akan menghasilkan / nilai akhirnya adalah true, jika kedua nya(kanan dan kiri) false baru hasil akhirnya adalah false
+
+//! untuk melakukan prioitas di mysql kita bisa menggunakan tanda () kurang , yang artinya di dahulukan atau di prioritaskan
+
+select * from asetkendaraan where (id =1 or warna = 'hitam') and jumlah >=2;
+
+   ini artinya mencari data utamakan syarat yang di dalam kurung setelah itu baru syarat diluar nya
+
+//! Mencari data dengan OPERATOR LIKE
+
+di where operator terdapat kata kunci like yang bisa di kombinasikan mencari data
+arti kata like disini, biasa nya di gunakan untuk mencari data dalam string
+namun perlu diingat pengguanaan like ini tidak cocok untuk data yang ukuranya sudah besar, karena akan menscan satupersatu sehingga lama
+
+like operator  hasil
+LIKE 'a%'      string dengan awalan a
+LIKE '%a'      string dengan akhiran a
+LIKE '%muhammad%' string yang berisi kata muhammad
+NOT LIKE          tidak LIKE
+
+
+like operator tidak case sensitif artinya tidak memperdulikan huruf besar atau kecil
+
+
+ cara penggunaan nya
+
+//todo
+ SELECT * FROM NAMATABEL WHERE NAMACOLOM LIKE JENISOPERORLIKE
+contoh
+
+select * from asetkendaraan where nama like 'a%';
+artinya tampilkan semua colum dari tabel asetkendaraan dengan namakolm nama yang berisi value diawali dengan huruf a
+
+maka akan ditampilkan semua tabel dari colum nama yang diawali dengan huruf a
+
+
+ 
+
+//! Mencari data dengan NULL OPERATOR
+
+null operator digunakan untuk mencari nilai null, di mysql kita tidak bisa mengguanakan perbanding = null,
+untuk mencari nilai null harus menggunakan null operator pada where operator
+
+//todo
+
+SELECT * FROM NAMATABEL WHERE NAMACOLOM IS NULL;
+
+contoh
+select * from asetkendaraan where nama is null;
+
+artinya pilih semua colum dari tabel asetkendaraan dari colum nama apakah ada nilai null
+jika ada maka akan ditampilkan , jika tidak ada maka akan mereturn 'Empty set' , atau data tidak ada
+
+//! Mencari data dengan BETWEEN operator
+
+biasanya saat kita akan mencari data dengan nilai diantar nilai lain biasanya kita menggunakan mencari data dengna kondisi < (kurang dari) atau > (lebih besar dari), di mysql ada opertor BETWEEN , operator ini adalah bentuk sederhana untuk menggunakan data yang berada diantara / kisaran nilai lain
+
+contoh menggunakan < atau >
+select * from asetkendaraan where id>=5 and id<=10;
+artinya kita mencari kolom nilai yang memilki value lebih besar atau sama dengan 5 dan kurang dari atau sama dengan 10
+
+dari diatas kita bisa sederhanakan
+dengan contoh sebebagai berikut
+//todo
+select * from namatabel where namacolum BETWEEN value and value;
+contoh
+select * from asetkendaraan where id BETWEEN 5 and 10;
+ini artinya pilih semua kolom yang memililki id diantara 5 sampai 10;
+
+
+//! Mencari data pada OPERATOR IN
+
+ operator IN ini digunakan saat mencari data dalam sebuah kolom dengan beberpa nilai
+
+ //todo
+ select * namatabel where namacolum in ('valuenya','valuenya');
+
+ contoh
+ select * asetkendaraan where nama in ('jazz','alpard');
+
+ artinya pilih data dari tabel asetkendaraan dari colum nama yang memiliki nilai 'jazz' dan nilai 'alpard'

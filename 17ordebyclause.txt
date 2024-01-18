@@ -1,0 +1,17 @@
+! ORDER BY CLAUSE
+
+kata kunci ini dalam queri sql digunakan untuk mengurutkan data secara ASC (ascending), dan DESC(descending)
+ascending dari kecil ke besar / dari depan ke belakan, dan descending dari besar ke kecil / dari belakang ke depan
+
+//todo
+SELECT * FROM NAMATABEL ORDER BY namacolum asc
+
+contoh
+select * from asetkendaraan order by nama asc;
+
+artinya tampilkan semua colum dari tabel asetkendaraan urutkan kolum nama secara ascending
+
+jika ingin lebih maka tinggal tambahkankan saja dengan pemisah tanda koma
+contoh
+select * from asetkendaraan order by nama asc,warna desc;
+

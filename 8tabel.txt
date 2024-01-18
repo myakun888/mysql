@@ -49,7 +49,10 @@ alter table namatabel fungsinya;
 fungsinya sebagai berikut
    ADD COLUMN nama_column TIPEDATA;            ---> ini untuk menambah colum
    DROP COLUMN nama_columm;         ----> mengahapus colum
+   RENAME  namabaru_tabel         -----> mengubah nama tabel
    CHANGE nama_column namabaru_column TIPEDATA;   ----> mengubah namacolum
+
+   MODIFY namacolumn TIPEDATA ;   ---->mengubah tanpa memindahkan posisi
    MODIFY namacolumn TIPEDATA AFTER columnlain;   ----> memindahkan/ mengubah posisi kolum ke setelah columnlain
    MODIFY namacolumn TIPEDATA FIRST; ---> memindahkan / mengubah posisi tabel kedepan  
 

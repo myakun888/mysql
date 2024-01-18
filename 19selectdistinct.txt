@@ -1,0 +1,23 @@
+//! SELECT DISTINCT
+
+saat kita menampikan data terkadang akan menampilkan duplikat atau lebih padahal nilai ny sama,
+jika kita ingin mendapatkan nilai tampa duplikat kita bisa menggunakan disctint
+
+   //! MENGHILANGKAN DATA YANG DUPLIKAT 
+//todo
+SELECT DISTINCT NAMACOLOM FROM NAMATABEL;
+
+contoh
+
+select disctint warna from asetkendaraan;
+
+artinya akan menampilkan warna dari tabel asetkendaraan, untuk value dari warna yang duplikat tidak di tampilkan
+
+
+perulu di ingat DISTINCT akan efektif jika hanya digunakan untuk pencarian 1 kolom,
+kalau lebih tidak ada dampaknya , dia akan hanya berdampak pada colom terakhir
+
+contoh
+select disctint warna , nama from asetkendaraan;
+
+ini hanya akan berdampak pada colom nama

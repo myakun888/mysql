@@ -1,0 +1,40 @@
+! ALIAS
+
+mysql memiliki fitur alias , alias digunakan untuk memberikan nama lain pada sebuah column atau tabel, misal saat ada tabel colum terlalu panjang, atau nama tabel tidak sesuai representasi ny, jadi kita menggunakan keyword AS untuk memberi nama lainya
+
+//todo
+//! alias untuk column
+SELECT namacolum1 AS namalaincolum1,
+      namacolum2 AS namalaincolum2,
+      namacolum3 AS namalaincolum3,
+   FROM NAMATABEL;
+
+contoh
+
+SELECT id AS kode,
+      nama AS merek,
+      description AS penjelasan,
+      from asetkendaraan
+   
+   artinya 
+ ini artinya saat di tampilkan nama kolum id menjadi kode dan nama kolum descripsi menjadi penjelasan
+//! contoh alias pada tabel
+
+//todo
+SELECT namacolum1 as namalaincolum1 from NAMATABEL as namalaintabel
+
+
+
+
+select id as kode from asetkendaraan as datakendaraan;
+artinya
+
+pada saat ditampilkan nama colum id menjadi kode nama database asetkendaraan menjadi datakendaraan
+
+mungkin ini belum berguna, ini akan berguna pada saat melakukan join
+pada saat join harus di tambahkan nama tabel nya baik saat dia melakukan alias atau tidak
+
+select datakendaraan.id as kode from asetkendaraan as datakendaraan;
+
+karena nama tabel asetkendaraan sudah di alias / as ke datakendaraan maka nama columnya harus tambahkan , ini berlaku saat kita sudah melakukan join
+

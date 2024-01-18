@@ -1,0 +1,50 @@
+//! NUMERIC FUNCTION 
+
+MYSQL memilki bebera fitur yang berhubungan dengan angka , secara garis besar terbagi menjadi dua 
+
+* 1. Aritmacti Operator (Operator matematika)
+mysql juga memiliki operasi operator matemitak 
+
+%, mod  --> untuk sisa bagi atau modulo
+*       --> untuk perkalian
++       --> operator tambah
+-       --> operator kurang
+/       --> operator pembagian hasil ny floating point / angka decimal
+DIV     --> integer div , hasil ny adalah bilangan bulat (pembagian biasa)
+
+      untuk div dan / memilki hasil yang sama
+
+
+
+contoh
+
+select 1000 *  1000;
+atau jika ingin membuat tabel ny tambhakan alias
+
+select 1000 * 1000 as hasil
+
+
+contoh lain
+//todo
+kita ambil dari nilai di dalam tabel
+select namcolum1, namacolumn2 div 1000 as 'namaaliascolumn' from namatabel;
+ 
+select id, harga div 1000 as 'jumlah' from asetkendaraan;
+artinya
+tampilkan kolom id dan kolom harga, kolom harga dibagi 1000 dan buat nama alias jumlah dari tabelasetkendaran;
+
+
+ *2. MATEMATICAL FUNCTION (FUNCTION MATEMATIKA)
+
+ selain operator matematic kita juga bisa menggunakan function matematic seperti mencari sin, tag, dan cosinus 
+ atau mencari pi
+  contoh
+pi ()                --> untuk mencari pi
+power(nilai,pangkat) --> mencari nilai pangakat
+cos ()
+sin ()
+tan ()
+
+
+contoh
+select cos(100);

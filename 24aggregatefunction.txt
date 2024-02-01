@@ -1,0 +1,24 @@
+! Aggregate function
+mysql juga mendukung Aggregate function, contoh aggregate 
+seperti saat kita ingin melihat nilai paling tinggi, paling rendah atau rata-rata itu termasuk agregate
+
+ beberapa functionya
+count()
+avg()
+max()
+min()
+
+untuk lebih jelas lihat dokumentasi mysql aggregate function
+
+contoh 
+select count(id) as 'total id' from product;  ---> function count berguna untuk melihat jumlah baris/ value dalam colum tersebut
+
+
+//! perlu di ingat
+aggregate function tidak bisa di gabung tanpa grouping atau group by
+contoh
+
+select id, count(id) from databarang;  ==> ini akan error
+
+
+nanti grouping akan di bahas di materi tersendiri

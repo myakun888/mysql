@@ -1,0 +1,29 @@
+//! DATE AND TIME FUNCTION;
+
+mysql juga memilki date and time function
+function ini digunakan untuk mengolah tipe data date and time;
+
+
+diantaran mengambil tahun,bulan dan hari
+
+//todo
+select nama, extract(year from namacolumn) as year from from namacolumn   --> ini mengekstrak / mengambil tahunya
+
+jika lebih dari satu 
+
+select nama, extract(year from namacolumn) as tahun, extract(mounth, namacolumn) as bulan from namatabel 
+
+
+contoh
+
+select nama, extra(year from waktu) as tahun from info
+artinya tampilkan column nama, extrak/ keluarkan tahun dari tabel waktu dan simpan dengan nama sebagai tahun dari tabel info
+
+ //! alternatif lebih simple dengan function nya
+
+//todo
+ada yang lebih simple dari mengunakan kata kunci extrak yaitu langsung tipenya
+contoh
+select nama, year(namacolum) as tahun , month(namacolum) as bulan from namatabel;
+
+jadi ini lebih simple kita langsung gunakan function nya misalnya year() untuk tahun, month() untuk bulan

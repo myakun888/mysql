@@ -1,0 +1,29 @@
+//! STRING FUNCTION
+
+di mysql juga memilki string function, sehingga kita bisa memanipulasi string di mysql diantaranya
+
+lower()  --> mereturn string menjai huruf kecil
+upper()  --> merubah string menjadi huruf besar
+lcase (), ucase() persamaan atau ganti dari lower dan upper ,fungsi ny sama
+
+
+concat() --> menggabungkan string
+concat_ws() --> menggabungkan string dengan tanda sparator / pemisah
+Ltrim()  --> untuk memotong / membuang spasi di awal sebelah kiri
+Rtrim()  --> untuk memotong / membuang spasi di sebelah kanan
+trim()   --> untuk membuang spasi di kanan dan kiri string
+
+//! silahkan lihat di dokumentasi nya karena memilki cara ternsendiri
+
+contoh penggunaan concat_ws   // ini concat with sparator / tanda pemisah
+concat_ws(separatr, col,col)
+
+ select concat_ws(" ",col1,col2) as data from barang
+
+ini artinya mengabungkan data col1 dan col2 dengan tanda pemisah " " (spasi) dan membuat nama colom alias dengan nama data dari tabel barang
+
+
+contoh penggunaan Rtrim
+
+select Rtrim(col)
+select Rtrim(string)

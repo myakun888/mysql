@@ -1,0 +1,64 @@
+//! Flow control pada mysql
+
+mysql memilki beberapa logika pada sql
+tp perlu di ingat logic control flow pada mysql tidak sekomplek pada bahasa pemrograman lain, tetapi di sini kita akan membahas control flow pada mysql
+diantaranya
+
+CASE     --- ini berguna untuk case operator
+IF()     --- IF/ELSE construck
+IFNULL() --- NULL IF/ELSE construck
+NULLIF
+
+
+kita akan membahas beberapa
+
+
+   //! control flow CASE
+case sama seperti case pada bahas pemrograman lain seperti switch case, best practice pengunanaan nya untuk perbandingan sama dengan contoh
+
+      contoh pengguanna case
+      //todo
+      SELECT *,case column 
+               when 'makanan' then'hasil',
+               when 'kondisi' then 'hasil',
+               else 'hasil'
+               end
+               as 'aliascolum'
+         from tabel;
+
+
+//! control flow IF
+sama seperti case , if juga mirip tapi tidak sekompleks dalam bahasa pemrograman lain
+
+contoh penggunaan nya
+
+      //todo
+1.
+ select column1, column2 ,if(kondisi, result, else/selain dari itu) as namalain column2 from namatabel;
+      contoh
+      select data, jumlah, if(jumlah<=3000, 'stock sedikit', 'stock aman') as 'stock sekarang' from databarang;
+artinya pilih colum data, jumlah, jika jumlah <= 300 , stock sedikit , selain itu 'stock aman' buat nama lain sebagai stock sekrang dari tabel databarang;
+
+2 contoh jika lebih dari satu kondisi
+ select column1, column2 ,if(kondisi, result, if(kondisi,result,else/selain dari itu)) as namalain column2 from namatabel;
+     
+      select data, jumlah, if(jumlah<=3000, 'stock sedikit', if(jumlah>=500,'stock lumayan', else/selain dari itu)) as 'stock sekarang' from databarang;
+
+      //todo , perlu di perhatikan jika lebih dari 1 kondisi kita buat kondisi lain di dalam kolom nya
+
+
+//! control flow IFNULL
+
+controlflow ifnull digunakan untuk mengecek jika isi record dari suatu tabel null
+
+//todo
+select colum1, ifnull(column2,result) as namalaincolum from namatabel;
+
+contoh
+select data, ifunull(jumlah,'kosong') as stock from databarang;
+
+artinya
+pilih colum data, jika colum jumlah berisi null maka ubah menjadi kosong , simpan dengan nama colum stock dari tabel databarang;
+
+
+dan masih banyak lain control flow untuk lebih detail silahkan lihat di dokumentasinya mysql

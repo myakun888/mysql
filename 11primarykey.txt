@@ -7,7 +7,7 @@ jadi gunakan PRIMARY KEY pada sesuatu yang unik
 contoh jika tabel yang berisi nama,noktp , status
 yang cocok di jadikan PRIMARY key adalah no ktp
 
-atau jika kita membuta tabel yang berisi id, nama, asal
+atau jika kita membuat tabel yang berisi id, nama, asal
 kita bisa gunakan id yang menjadi PRIMARY key
 
 

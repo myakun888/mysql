@@ -1,0 +1,92 @@
+//! FULL TEXT SEARCH
+
+mysql juga mempunyai fitur pencarian selain where, yaitu full text search, ini cara kerjanya seperti mesin pencari 
+tapi perlu di ingat fitur ini tidak sekomplek dari databse yang kusus untuk search engine seperti elastich search
+
+fitur ini tidak terlalu penting tp mysql mempunyai fitur yang mirip mensin pencarian yaitu full text search
+
+jika sebelumnya kita menggunakan where clause , full text search sedkit libih unggul
+
+   //! membuat fulltext search
+perlu di ingat full text search ini adalah bagian dari index jadi saat menghapus kita menggunakan index
+
+
+cara membuat fulltext search saat membuat tabel
+ //todo
+create table nametable (id int, name varchar(100),
+fulltext namafulltext (columnya)
+)engine = innodb
+
+contoh
+create table datapelanggan (id int, nama varchar(100),asal varchar(100), fulltext namafs ('nama','asal')) engine= innoDB
+
+artinya 
+kita membuat tabel datapelangan degan colum id, kolom nama lalu membuat fulltext search untuk kolom nama dna kolom asal diberi nama namafts
+   note kita bisa menambhakna lebih dari satu kolom ckup tambahkan saja dalam kolomm nya
+
+   //! menambah kan dan menghapus fulltext search
+
+jika tabel sudah lebih dulu dibuat kita bisa menggunakan alter table
+
+//todo 
+alter table namatabel add fulltext namalainy (colom,colom2,colm3)
+contoh
+alter table datapelangan add fulltext namasearch ('name','descripsi');
+artinya kita menambahkan fulltext dengan namasearch dengan kolom name dan descripsi
+
+
+   untuk menghapus perlu di ingat karena fulltext search adalah bagian dari index , jadi saat menghapus menggunakan kata kunci index
+//todo
+   alter table drop index namafulltext ;
+contoh
+alter table drop index namasearch;
+
+
+//! menggunakan fulltext search
+
+tadi kita sudah membuat dan menghapus , cara mengguanakan queri ny 
+sebelum ke cara menggunakanya kita akan bahas 3 mode fulltext search
+
+ setiap mode menghasilkan hasil pencarian degan karakter masing-masing
+
+ 1. natural language mode
+    yaitu melakaukan pencarian perkata seperti biasa ( hasilnya mirip where like clause )
+   
+ 2. boolean mode
+   yaitu pencarian mengandung kata dengan tand (+), dan tidak mengandung kata ditandai (-), masih banyak tanda yang lain untuk fitur ny
+   contoh 
+   jika ("+ muhammad -dosa") artinya semua data mengandung kata muhammad , dan tidak mengandung kata dosa
+ 
+ 3. query expansion mode
+   yaitu pencarian yang melakukan 2 kali pencarian ,pertama dia mencari secara natural language, lagu di expansi dengan kata yang berhubungan dengan hasil sebelumnya
+   contoh 
+   saat mencari kata 'muhammad nabi allah ' setelah di tampilkan hasil 'muhammad nabi allah' selanjutnya kata yang berhubungan dengan hasil pencarian diatas akan di tampilkan juga 
+   , untuk hasil pencarian expansi nya kita tidak bisa memprdeksi karena itu dr mysql ny 
+
+
+
+//! cara menggunakan filtertext search
+
+   select * from namatabel where match (colm yang dibuat fulltext,colm yang dibuat fulltext,) againts ('kata yang dicari', in modeyangdigunakan)
+
+
+kita asumsikan colom yang kita buat untuk fulltext search nya adalah jenisbarang
+
+   //! mencari dengan MODE NATURAL LANGUAGE
+
+//todo
+   select * from datapelangan where match (jenismember) againts ('otomotif' in natural language);
+artinya
+ pilih semua(*) tabel dari data pelangann yang memilki kecocokan dari kolom jenis member , kata yang dicari 'otomotif' pada mode natural language;
+
+   //! mencari dengan MODE BOOLEAN
+   select * from datapelanggan where match (jenismember) againts ('+otomotif -api' in boolean mode);
+artinya
+pilih semua (*) tabel dari data pelanggan yang memiliki kecockan dari kolom jenis member, kata yang dicari (+)include/termasuk 'otomotif' , dan (-)tidak termasuk/ exclude 'api' pada mode boolean mode
+
+
+   //! mencari dengan mode expansion
+   select * from datapelanggan where match(jenismemeber) againts ('otomotif' in expansion mode);
+artinya 
+pilih semua (*) tabel dari data pelanggan yang memiliki kecocokan dari kolom jenis member, kata yang dicari 'otomotif' pada mode expansi mode
+

@@ -1,0 +1,38 @@
+//! Group By
+
+saat kita akan mengunakan aggregate function kita tidak bisa menggunakan ny untuk di gabungkan dengan column lain,
+
+jika kita ingin menggunakan aggregate function dan menggabungkanya dengan colum lain kita harus menggunakan kata kunci GROUP BY clause
+
+group by clause ini hanya bisa digunakan jika menggunakan aggregate function
+//todo
+
+select colum1, max(colum2) as namalaincolum2 from namatbel group by colum1;
+
+   contoh
+   select data, max(jumlah) as nilaitertingi from databarang group by data;
+
+   artinya 
+   pilih data , cek nilai maximal dari colum jumlah dan jadikan nilaitertingi sebagai namalain colum jumlah dari tabel databarang gour by data jumlah; 
+
+//todo perlu diperhatikan 
+dari contoh diatas kita melakukan aggregate function terhadal colum jumlah dan menggabungkan nya terhadap colum 
+
+
+//! having clause
+
+saat kita menggunakan group by , kita juga ingin memfilter atau menseleksi hasil dari group ny kita tidak bisa menggunakan where clase , untuk melakukan hal tersebut kita menggunakan having clause
+
+//todo
+select colum1, max(colum2) as namaliancolum2 from namatabel group by colum1 having namalaincolum2 > 1
+   contoh
+   select data, max(stock) as barangready from databarang group by data having barangready >100;
+
+   artinya
+
+   pilih column1 , cek nilai maximal dari colom stock dan jadikan barangready sebagai namalain dari stock lalu grouping dengan colum data dan filter barangreadi dengan kondisi lebih dari 100;
+
+
+
+
+

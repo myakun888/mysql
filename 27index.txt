@@ -1,0 +1,98 @@
+//! INDEX
+   mysql secara default menyimpad data di dalam disk seperti tabel biasanya
+hal ini menyebabkan ketika kita mencari data mysql akan mencari secara baris perbaris 
+jika data sudah banyak ini akan menyebabkan proses pencarian menjadi lama
+tapi untung nya mysql memiliki fitur index
+
+   saat kita menggunakan index mysql akan menyipan data dalam struktur b-tree
+(silahkan lihat / serching struktur data b-tree )
+
+   //! kelebihan
+-manfaat nya proses pencarian data  / serching menjadi cepat
+-dan juga saat kita menggunakan queri order by juga akan menjadi cepat
+
+
+    //! cara kerja index
+   cara kerja index pada mysql, artiny kita akan membuat kolom yang di beri index menjadi prioritas, kita bisa menambahkan index lebih dari satu kolom
+   misal kita membuat index 
+   (col1,col2,col3)
+   kita bisa memnggunakan index tersebut menjadi kombinasi queri seperti berikut
+   (col1), (col2), (col3) dan (col1,col2,col3)
+
+   //! efek samping index
+   saat kita menambahkan index pada colom, mysql akan mengupdate setiap kita melakukan queri dml(data manipulasi language) baik itu insert, update , delete
+   sehingga akan mengakibatkan proses (dml/ data manipulasi language) seperti insert, update, delete  menjadi lambat
+
+   ini tidak akan terasa jika data masih kecil, tapi jika data sudah besar ini akan memperlambat proses manipulasi data (dml)
+   jadi kita harus bijak menggunakan index
+
+
+//! tidak perlu index
+kita tidak perlu menambahkan index kepada cololm yang sudah ada atribut primary key, constraint unique ,constraint check
+karena secar defult ini sudah di beri index oleh mysql
+
+
+
+//! membuat index
+saat kita pertama kali membuat tabel kita bisa menambahkan langsung index nya, 
+
+//todo
+create table namatabel (col1 int auto_increment, 
+                        col2 varchar, 
+                        col3 varchar,              
+                        primary key (col1),        
+                        unique key namaunik (col2),
+                        index namaindex (col3)
+                        ) database = innoDB;
+
+
+   contoh
+create table datapelangan (id int auto_increment,
+                           nama varchar,
+                           email varchar,
+                           primary key (id),
+                           unique key emailunik(email),
+                           index namaindex (nama)
+                           )engine = innoDB;
+artinya 
+buat tabel dengan nama datapelangan dengan colum id auto increment, nama, email, id sebagai primary key, uniqe key / constraint uniqe untuk email dengan nama emailunik, index untuk colum nama dengan nama namaindex, engine innodb
+
+untuk melihat hasil nya kita bisa menggunakan show create table namatabel;
+
+ //! note , kita bisa menambahkan lebih dari satu index,kombinasi index
+
+   saat dalam pembuatan tabel nya  
+   create table namatabel (col1 int auto_increment, 
+                        col2 varchar, 
+                        col3 varchar,              
+                        col4 varchar,              
+                        primary key (col1),        
+                        unique key namaunik (col2),
+      //!               index namaindex (col3),
+      //!               index namaindex (col4),
+      //!               index namaindex1_namaindex2,namaindex3 (col1,col2,col,3),
+                        ) database = innoDB;
+
+
+   //! menambah dan mengahapus index
+
+   jika tabel sudah terlebih dahulu dibuat, kita bisa menambahkan index dengan cara alter tabel
+
+alter table namatabel add index namaindex (colum);
+contoh
+alter table datapelanggan add index namaindex (nama);
+
+   menghapus tabel index
+alter table namatable drop index namaindex;
+contoh
+alter table datapelanggan drop namaindex;
+
+
+//! kapan saat yang tepat menggunakn index 
+
+ini sebenarnya kebijakan kita masing masing ,selagi masih bisa di handle dengn where like operator gunakan like operator, 
+tapi jika data sudah sangat banyak tidak memungkinkan lagi menggunakan like operator , karena like bersifat menscan data dari
+atas baru kita mengguankan index , tapi perlu di ingat dampak atau kekurangan dari index  yaitu akan membuat
+ mysql mengupdate semua data(karena dampa dari b-tree) sehingga data mysql semua di update  pada proses data manipulasi 
+ language(dml) seperti insert, update, delete, di satu sisi query menjadi cepat tapi 
+ di sisilain proses dml(insert, update, delete) menjadi lambat

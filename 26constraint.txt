@@ -1,0 +1,100 @@
+//! CONSTRAINT
+
+
+
+di mysql kita kita bisa menambahkan constraint untuk menjaga daa di tabel tetap baik, contoh misal kita tidak ingin memasukan 
+data yang duplikat, atau pengecekan data / validasi data sebelum di input atau di simpan di dalam tabel,
+
+constrain ada 2 
+unique constraint dan check constraint
+
+ //! UNIQUE CONSTRAINT
+constrain juga disebut sebgai unique key, atau bisa di sebut data unique yang tidak sama dengan data lain
+
+
+   //! membuat tabel constraint
+untuk membuat constrain bisa saat pembuatan tabel
+constrain bisa lebih dari satu, tetapi di contoh ini kita hanya membuat satu saja
+
+contoh
+create tabel namatabel (col1 int not null auto_increment, 
+                        col2 varchar , col3 varchar
+                        primary key(col1)
+                        unique key namakey (col2/ kolom yang akan di jadikan constrain) ) engine = innoDB;
+
+ 
+ create tabel datapelangan (id int not null auto_increment,
+                           nama varchar(100,)
+                           email varchar(100,)
+                           primary key (id),
+                           unique key emailuniqe (email)) engine = innodb;
+
+penjelasan
+ kita membuat tabel dengan nama pelanggan dengna colum id tipe data integer di seting auto increment, nama varchar , email varchar, primary key ny colum id, unique key kolom email diberi nama emailuniqe , engine innodb
+
+untuk melihat hasil nya kita bisa menggunakan show create table namatabel atau desc namatabel;
+   //!  menambah dan menghapus constraint
+   jika tabel sudah kita buat terlebih dahulu , lalu kita ingin menambahkan contsraint pada tabel yang sudah ada
+   kita cukup menggunakan alter tabel sebagai berikut
+
+      alter tabel namatabel add contsraint namaconstrain unique (colum yang dijadikan constrain);
+
+   contoh
+    alter tabel datapelangan add constraint emailunique unique (email)
+
+
+   menghapus contsraint
+   alter tabel namatabel drop constraint namaconstrain;
+
+   contoh
+   alter tabel datapelanggan drop constraint emailunique;
+
+
+   //! CHECK CONSTRAINT   
+   constrain check cara kerja ny mirip contraint unique hanya dia seperti kondisi
+   contoh kita memasng konstrain check di harga , kita kondisikan constrain check untuk harga >= 100000, artinya
+    saati input data pada harga hanya constrain akan mengecek jika jika lebih dari atau sama dengan 100000 maka harga bisa di simpan di data jika tidak akan di tolak / reject
+
+
+
+
+   //! menambah dan menghapus constrain check
+    cara membuat constraint check hampir saat membuat tabel
+
+//todo
+create table namatabel (colm int not nul auto_increment,
+                       colm2 varchar(100),
+                       colm3 int,
+                       constrain namacontsrain check (namacolum dan kondisi nya))
+contoh
+create tabel datapelanggan (id int not null auto_increment
+                            nama varchar(100),
+                            harga int,
+                            contraint hargaunik check (harga >= 100000))
+
+artinya
+buat tabel datapelanggan colum id data int, colum nama varchar colm harga int, costaraint dengan nama hargaunik check (kolom harga dengan kondisi >= 100000)
+
+
+jika tabel sudah terbuat lebih dahulu, kita bisa menambahkan contstraint check dengan alter table
+
+//todo
+   alter table namatatbel add constraint namaconstrain check (colum dan kondisi nya)
+contoh
+altert table datapelanggan add constraint hargaunik check (harga >= 100000);
+
+
+   //! menghapus constraint chek
+
+alter table namatabel drop constraint namaconstraint;
+
+contoh
+
+   alter table datapelanggan drop constraint hargaunik;
+
+
+
+//! PERLU DI PERHATIKAN 
+karen constrain adalah salah satu nya mencegah data duplikat saat di input, saat menambahkan constrain jika tabel sudah dibuat pastikan tidak ada data yang sudah di input, karena jika ada data yang sudah di input dan data nya duplikat maka penambahan constraint tidak dapat dilakukan / error, kita harus menghapus terdahulu atau mengupdate data yang duplikat tersebut
+
+kesimpulannya membuat constraint baik unique atau check, itu lebih bagus saat membuat tabel, jika ingin menambahkan setelah tabel dibuat lebih dahulu perhattikan data yang sudah di input seperti penjelasan diatas

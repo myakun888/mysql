@@ -1,0 +1,71 @@
+//! JOIN
+-sebelum ny jika kita ingin melakukan queri select itu hanya berlaku untuk tabel tersebut
+mysql memilki fitur untuk melakukan queri dan menampilkan hasil dari gabungan beberapa tabel, ini di sebut join untuk melakukan tersebut kita harus melakukan join di queri select
+sehinga kita bisa menampilkan hasil dari colom yang kita cari dengan menggabungkan beberapa tabel dengan satu kali queri select
+
+- join sangat cocok dengan foreign key , dan kita dapat memanfaatkan foreign key tersebut menjadi penghubung antara tabel yang kita hubungkan , meskipun tidak ada aturan untuk melakukan join harus ad foreign key
+namun akan lebih maksimal jika kita melakukan joint dan kita menerpkannya berdasarkan colom yang kita gunakan dengan foreign key
+
+- untuk join kita bebas melakukan joint dari beberpa tabel, tapi perlu di ingat jika data sudah jutaan maka semakin banyak tabel yang kita join maka hasil queri akan semakain lambat, untuk ideal nya maskimal joint tabel itu hanya 5 tabel
+
+
+//! cara melakukan join
+ tampa ada tabel relasi
+
+select * from tabel1 join tabel2
+ini artinya tabel 1 menggabungkan dengan tabel 2, dan semua colom pada tabel tersebut akan di tampilkan
+
+
+   joint dengan tabel yang ada relasi
+caranya hampir sama cukup tambhakn on (columdaritabel1yangdihubungkanketabel2 = columdaritabel2yangdihubungkanketabel1)
+contoh
+
+select * from tabel1 joint tabel2 on (tabel1.colum1 = tabel2.colum2)
+
+   artinya 
+   kita menggabungkan tabel1 dan tabel 2 dengan colum yang terhubung yaitu colum1 dan colum2
+perlu di ingat untuk melakukan joint yang memiliki relasi/ foreign key pastikan kolom yang akan di gunakan untuk di jadikan digabung sudah melakukan relasi ( silahkan lihat materi relasi/ relation)
+
+//! jika belum di relasi kita haru relasikan dahulu
+
+contoh merelasikan colom
+kita asumsikan kita buat relasi tabel keranjang kolomnya idbarangkeranjang yang akan di relasikan dengan tabel barang kolomnya idbarang
+ membuat relasi tabel
+alter table keranjang add constrain fkidkeranjang FOREIGN key (idbarangkeranjang) references barang (idbarang)
+
+setelah ada relasi baru lakukan join menggunakn on
+
+contoh
+select * from tabel1 join tabelyangakandijoin on (kolomtabel1yangsudahdilakukanjointketabel2 = tabe2yangsudhadilakukanjointketabel1)
+
+select * from keranjang join barang on (keranjang.idbarangkeranjang = barang.idbarang)
+
+
+
+   //! multiple joint / joint lebih dari satu tabel
+
+1 joint dengan lebih dari satu tabel tanpa colum yang dihubungkan / tanpa ada relasi
+
+select * from namatabel join tabelyangakandijoin1 join tabellyangakandijoin2;
+ ini cara menampilkan semuanya semua isi colum dari 3 tabel tersebut akan tampil
+
+
+2 join dengan lebih dari satu tabel dengan colum yang ada relasi 
+select * from namatabel join tabelyangakandijoin1 on (namatabel.colum = columtabel1yangsudahdijoin) join tabellyangakandijoin2 on (namatabel.colum = columtabel2yangakandijoin)
+
+
+
+
+//! perlu di ingat
+jika kita ingin menampilkan hasil queri select join dengan colum yang ada relasi gunakan kata kunci on
+maka hasil queri hanya colom yang memiliki relasi diantara tabel tersebut, jika tidak ada kata kunci on maka semua isi tabel / colom dari setiap tabel akan di tampilkan
+
+
+
+   //! jenis jenis join
+1. inner join
+2. right join
+3. left join
+4. cross join
+
+untuk lebih jelas akan dibahas di materi tersendiri

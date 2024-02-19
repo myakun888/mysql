@@ -1,0 +1,55 @@
+//! ONE TO ONE RELATIONSHIP
+
+materi sebelumnya kita sudah mempelajari cara melakukan relasi antar tabel kita bisa menggunakan foreign key
+untuk melakukan queri SELECT kita bisa menggunakan kata kunci join
+dalam konsep relasi ada banyak jenis relasi di materi ini kita akan membahas one to one relasi
+
+   //! PENJELASAN ONE TO ONE RELATIONSHIP
+salah satu contoh relasi tabel paling sederhana adalah one to one relasi
+ini adalah suatu relasi yang menghubungkan satu tabel ke satu tabel lain
+artinya setiap data dalam satu tabel hanya boleh berelasi ke maximal 1 tabel lain
+
+contoh kita punya aplikasi toko online dimana kita tabel walet yang hanya bisa terhubung ke 1 tabel customer
+karena 1 customer hanya bisa memilki 1 walet(dompet) pada aplikasi online tersebut
+
+
+   //! membuat tabel one to one relationship
+untuk membuat one to one relationship ada 2 cara
+
+1. mengunakan foreign key, lalu foreign key ny kita set dengan constraint unique key agar tidak duplikat datanya
+2. kita bisa juga menggunakan nama primary key yang sama (kedua tabel tersebut) sehingga kita tidak perlu menggunakan FOREIGN key lagi
+
+di contoh ini kita akan menggunakan contoh 1, diman kita akan mengguanakan foreign key 
+
+
+kita asumsikan memilki dua tabel , yaitu tabel customer memilki properti(idcumstomer, nama, alamat, primarykey(idcustomer)) primary key idcustomer,
+lalu tabel selanjut nya memiliki nama tabel walet dengan properti (id, idcsutomer, saldo , primarykey(id)) dan foreignkey ny kita akan set di colum dicustomer yang terhubung(references) dengan tabel customer dan columny adalah customerid
+
+   //! membuat dari awal tabel
+
+   create tabel walet (id int,
+                      idcustomerwallet varchar(100),
+                      saldo int,
+                      primary key (id),
+                      unique key fk_customer_unique (idcustomerwallet)
+                      constraint fk_id_customer FOREIGN key (idcustomerwallet) references customer (idcustomer)
+                      ) engine = innoDB;
+
+artinya
+   kita membuat tabel dengan column id int, idcustomerwallet varchar, saldo int, primarykey column id, unique key dengan nama fk_customer_unique pada colm idcustomerwallet, lalu membuat foreignkey dengan nama fk_id_customer pada colum idcustomerwallet yang terhubung(references) dengan tabel customer pada column idcustomer, dan engine nya adalah innodb;
+   
+
+   //! jika tabel sudah dibuat kita bisa menambahkan melalui alter 
+
+kita buat constrain unique dahulu
+   alter table walet add constraint fk_customer_unique unique (idcustomerwallet);
+
+baru kita tambahkan foreignkey
+alter table walet add constraint fk_id_customer foreignkey (idcustomerwallet) references customer (idcumstomer);
+
+
+//! KESIMPULANYA
+
+-one to one relationship bisa di katakan jika relasi antar tabel hanya masimal satu tabel
+-unutk memastikan bisa menggunakan id sma, atau foreign key dan kita tambahkan constrain unique key untuk memastikan tidak ada duplikat jadi menggunakan id atau foreignkey
+

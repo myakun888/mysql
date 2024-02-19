@@ -1,0 +1,152 @@
+//! RELATION
+sala satu fitur andalan dari mysql adalah relasi tabel(table relation), ini adalah fitur menghubungkan satu tabel ke tabel lain 
+contoh di kehidupan nyata relasi ini adalah 
+misal database mahasiswa ini yang memilki record
+id,nama, nim
+ini akan berlasi dengan daftar pelajaran / mata kuliah yang diambil yang mengambil di suatu mata kuliah
+yaitu nim 
+
+lalu contoh berikut nya 
+tabel barang yang memiliki record 
+idbarang,namabarang,stock
+akan berlasi dengan tabel keranjang yang memilki record
+idbarangkeranjang, namabarang, jumlah
+
+
+   //! FOREIGN KEY
+saat kita akan membuat tabel yang berelasi kita akan membuat tabel tersebut saling berhubungan, 
+contoh seperti tabel barang tadi 
+didalamnya ada kolom
+idbarang, namabarang stock
+lalu di keranjang ad kolom
+idbarangkeranjang , namabarang , jumlahbarang
+
+untuk menghubungkan tersebut kita akan membuat kolom tersebut saling terhubung , di sini kolom yang akan kita hubungkan adalah
+idbarang dan idbarangkeranjang ,kolom referensi yang menghunungkan tabel ini di sebut FOREIGN key
+
+saat kita membuat tabel relasi di tabel keranjang, maka yang jadi FOREIGN key ny adalah idbarangkeranjang, dan refrences nya adalah kolom idbarang dari tabel barang
+
+ atau untuk lebih simplenya FOREIGN key ini adalah primary key dari tabel lain yang nempel di tabel kita
+
+
+//! membuat FOREIGN key
+
+perlu di ingat saat membuat FOREIGN key pastikan colom refrence tersebut adalah primarykey dari tabel lain yang akan di gabungkan
+
+   contoh
+   tabel barang memilkik colum
+   idbarang, namabarang, stock   id barng sebagi primary key
+
+   di tabel keranjang kita akan membuat FOREIGN key dan relasi ke tabel barang
+
+create tabel kernjang (
+                        idbarangkeranjang int, 
+                        namabarang varchar(100), stock int,
+                        primary key(idbarangkeranjang),
+                        constraint fkidkeranjang (idbarangkeranjang) references barang(idbarang)
+                     ) engine = innoDB;
+
+artinya
+kita membuat tabel keranjang dengan colum idbarangkeranjang int, namabarang varchar, stock int
+kita set primarykey nya idbarangkeranjang, dan kita buat FOREIGN key dengan nama fkidkeranjang dari tabel idbarangkeranjang lalu dihubungkan / references dengan tabel barang dengan colom idbarang
+
+perlu di ingat membuat FOREIGN key itu menggunakan kata kunci dari constraint
+
+//! kelebihan menggunakan FOREIGN key,
+
+1. data tetap konsisten
+ketika data berelasi
+   saat kita menggunakan foreign key , ketika kita menginsert data atau memasukan maka mysql akan mengecek apakah data tersebut sesuai dengan data yang ada di tabel reference nya , jadi kita tidak sembarang mesukan data
+contoh 
+jika di tabel kerangn yang jadi foreign key ny adalah idbarangkeranjang, dan tabel idbarang menjadi reference ny
+maka tabel idbarangkeranjang harus sama data ny dengan tabel idbarang, sehingga data tetap konsisten
+
+2. data lebih aman
+ketika data berelasi
+kita tidak bisa asal manipualasi data (menghapus dan mengupdate) atau DML,(untuk DDL tetap bisa ) data dalam sebuah tabel yang jadi reference, ketika tabel yang menggunakan tabel tersebut menjadi references ny lalu di isi dengan data yang ad di tabel references maka kita tidak bisa asal menghapus otomatis di rejek oleh mysql ( kecuali kita seting on delete dan on update nya menjadi selain restrict), ini terjadi karena datanya di pakai di tabel lain, kecuali datanya tidak di pakai baru bisa di delete/ update 
+
+
+
+//! mengahpus data yang berelasi
+
+secara default kita tidak bisa mengahapus atau mengupdate data yang berelasi , karena secara default mysql saat menggunakan
+foreign key , mysql secara default di set dengan mode restrict
+jadi ketika kita menghapus atau mengapdate data yang menjadi parent / references sebuah data yang berelasi otomatis akan di reject atau di batalkan oleh mysql, ini karena mode restrict,
+ meskipun begitu kita bisa mengubah atau menseting menjadi bisa di delete atau bisa di ubah
+ sesuai dengan setingan berikut (delete dan updatenya)
+
+on delete dan on update itu akan menjadi 4 bagian
+1. restrict ---> artinya tidak bisa diubah
+2.cascade ---> bisa diubah
+3.no action ---> tidak ada aksi
+4. set null ---> data di set null
+
+
+jika kita tidak menambahkan mode apapun secara otomatis itu adalah restrict
+kita juga bisa mix menggabungkan on delete restrict on update cascade
+jadi kita bisa mengkombinasikan sesuai kebutuhan;
+
+
+ //todo
+ contoh
+
+ alter tabel keranjang add
+    constraint fkidbarang foreign key (idbarangkeranjang)
+    references barang (idbarang)
+    on delete restrict on update cascade
+
+artinya 
+kita membuat colum menambahkan constrain foreign key dengan nama fkidbarang dengan colomnya idbarangkeranjang, references 
+tabel barang dengan kolom id barang on delete restrict dan on update cascade
+ itu berati foreign key tersebut datanya di reference jika datanya di pakai maka datanya tidak bisa di delete, untuk update bisa di lakukan
+
+//! PENJELASAN SINGKAT ARTI SETIAP mode
+1.restrict 
+saat kita seting pada mode 
+on delete restrict on update restrict
+artinya setiap delete dan update tidak bisa di lakukan atau di reject oleh mysql
+
+2. cascade
+saat kita setting pada mode
+on delete cascade on update cascade
+artinya kita mengizinkan data tersebut di delete dan di update , dan jika data pada refrence nya di hapus otamatis data yang ad relasi akan terputus, jika hanya di update tidak terputus
+
+3.no action
+saat setting no action
+artinya tidak terjadi apa-apa saat jika di kita setting di delete , bearti saat di delete data di tabel reference nya maka tidak terjadi apa apa pada tabel yang ad foreign key nya, begitu pun jika kita seting on update no action
+
+4.set null
+saat seting sat null
+artinya jika kita seting pada on delete atau on update menggunakan set nul, ketika kita ubah data / delete data pada tabel refrence makan data yang terjadi relasi di tabel yang mengguanakan foreign key akan menjadi null
+tapi perlu di ingat saat kita membuat tabel nya kita harus tipe null karna jika tidak kita tipe null / izinkan null ketika di awal membuat tabel nya, karena jika tidak kita izinkan null / not null ketika menggunakan set null data akan tertolak
+
+
+//! jika hanya menambahkan salah satu mode
+
+kalau kita hanya menambahkan salah satu seperti hanya menambahkan 
+on delete cascade
+
+bearti untuk on updatenya itu ada restrict, karena secara default semua adalah restrict
+begitupun jika hanya menambahkan hanya mode on update no action berarti on deletenya adalah restrict
+//! cara mengubah behavior / menambahkan mode ny
+cukup tambahkan mode nya pada saat membuat tabel
+atau jika sudah di buat tabel nya kita bisa menggunakan alter table
+
+contoh
+
+alter tabel keranjang add constraint fkidbarang FOREIGN key (idbarangkeranjang) reference barang (idbrang) on delete restrict on update cascade
+
+
+   diatas adalah contoh delete nya restrict update nya cascade
+
+
+
+   //! jenis-jenis relasi
+   1. one to one
+   adalah relasi yang menghubungkan maksimal 1 tabel 
+   2. one to many
+   adalah relasi yang menghubungkan lebih dari 1 tabel
+   3. many to many
+   adalah relasi yang menghubungkan banyak tabel ke banyak tabel
+
+untuk lebih jelas akan di bahas di materi terpisah

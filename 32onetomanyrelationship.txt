@@ -1,0 +1,25 @@
+//! one to many relationship
+-adalah relasi satu tabel dimana satu data bisa digunakan lebih dari satu tabel lainya
+-berbeda dengan one to one yang hanya bisa maksimal 1 tabel, one to many tidak ada batasan berapa banyak data yang di gunakan
+- contoh one to many, tabel kategori dan produc, dimana kategori bisa di gunakan lebih dari satu product 
+-pembuatan tabel one to many mirip seperti one to one hanya saja kita tidak perlu menggunakan unique key , karena datanya bisa digunakan berkali kali
+
+
+contoh
+kita asumsikan kita memilki tabel categories dan tabel product 
+untuk properti nya categories (id varchar(100),nama varchar(100) primarykey(id))
+untuk properti nya product (id int , namaproduct varchar(100), idproduct varchar(100) primarykey (id))
+
+
+create tabel product (id int ,
+                     namaproduct varchar(100),
+                     idproduct varchar(100), primary key (id),
+                     constraint fk_id_product foreign key (idproduct) references categories (id)
+                     ) engine =innoDB;
+artinya
+kita membuat table product dengan colum id int, namaproduct varchar , idproduct varchar , primary key colum id, foreignkey ny colum idproduct yang terhubung (references) dengan tabel categories dan columnya adalah id
+
+
+
+//! kesimpulannya   
+one to many adalah satu data tabel yang dapat di gunakan untuk menghubungkan/ relasi lebih dari satu tabel

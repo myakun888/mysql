@@ -1,0 +1,124 @@
+//! many to many relationship
+-many to many adalah relasi antara dua tabel dimana tabel pertama meimilki banyak relasi di tabel kedua dan tabel kedua mililki banyak relasi di tabel pertama
+
+-bagi pemula mungkin agak sedikit membingungkan relasi many to many atau relasi banyak ke banyak, bagaimana caranya 1 tabel milki bolak balek ke relasi lain
+
+- contoh relasi many to many adalah relasi tabel product dan tabel penjualan, dimana setiap product bisa di jual berkali kali dan setiap penjualan bisa untuk lebih dari satu produck
+
+
+
+   //! pertanyaan nya bagaimana iplmentasinya ????
+sekarang pertanyaan nya bagaimana implentasi many to many
+apakah harus menambah idorder di tabel product ? atau idproduct di tabel order
+
+
+kita bahas satu persatu
+
+
+//! menambahkan id product di tabel order
+-jika kita menambahkan id product di tabel order artinya sekarang sudah benar bahwa satu product bisa kita jual berkali-kali
+-namun masalahnya berarti 1 order hanya bisa membeli satu product karena hanya ada satu kolom untuk id product
+-oke kalau begitu kita bisa tambahkan idproduct1, idproduct2 dst ini bisa tapi tidak baik karena akan ada batas maksimal setiap order
+ jadi ini bukan solusi yang baik....
+
+ //! menambahkan id order di tabel product
+ -jika kita balik dari contoh diatas yaitu kita menambahkan id order di tabel product, artinya kita bisa satu order bisa membeli 1 product
+ - tapi sayang nya masalah berbalik sekarang satu product cuma bisa dijual satu kali, karena kolom id order cuma satu
+ lantas bagaimana solusi yang terbaik???
+
+
+
+ //! membuat tabel relasi
+
+-artinya kita akan membuat tabel relasi , artinya kita menambahkan satu tabel di tengahnya antara tabel product dan tabel order
+-jadi tugas tabel yang di tengah tersebut akan menghubungkan kedua tabel tadi, jadi dalam artian many to many itu biasanya adalah dua tabel one to many yang dihubungkan oleh tabel tadi 
+
+
+jadi biasanya many to many adalah dua tabel one to many yang di hubungkan oleh tabel di tengahnya
+contoh
+ada 3 tabel A,B,C
+
+tabel A relasi B , one to many
+tabel C relasi B , one to many
+
+nah secara tidak langsung A dan C adalah relasi many to many yang di hubungkan oleh tabel B
+
+
+//! membuat tabel 
+dalam hal ini tabel A = product, B= order detail, C= order
+
+
+   //! tabel product
+create table product (id varchar(100), nama varchar(100), harga int ,primary key (id)) engine = innoDB;
+
+   //! tabel order
+create table order (id int , total int , tanggal datetime , primary key (id))engine = innoDB;
+
+
+   //! tabel orderdetail
+create table orderdetail (idproduct varchar(100), idorder it , jumlah int, harga int , primary key (idproduct, idorder))engine= innoDB;
+
+lalu kita tambahkan foreign key untuk 2 tabel ny dengan alter 
+
+alter table orderdetail add constraint fk_id_product (idproduct) references product(id); 
+   #ini untuk foreign key antara product dan order detail
+
+alter table orderdetail add constraint fk_id_order (idorder) references order(id);
+   #ini untuk foreign key antara order dan order detail
+
+
+   //! penjelasan
+tabel order detail berelasi dengan tabel product yang menguhubungkanya yaitu colum idproduct
+ (dari tabel order detail) - colum id (dari tabel product)
+dan selanjutnya tabel order detail berelasi dengan tabel orde yang menguhubungkanya yaitu colum idorder
+ (dari tabel order detail) - colum id (dari tabel order)
+
+
+//! cara melihat dengan queri select
+
+jika biasanya kita hanya selec * from namtabel , ini hanya menampilkan tabel itu sendiri
+
+karena ini many to many kita bisa melakukan sebagai berikut
+contoh jika kita dari tabel c
+select * from tabel c join b (c.id = b.id) join a (a.nama= b.nama)
+ 
+
+   //! penjelasan
+join pertama kita ambil relasi dari colom tabel c dan colom tabel b, 
+join ke dua kita ambil dari colom tabel a dan colom tabel b
+karena b adalah penghubung kedua tabel antar a dan c
+
+jadi inti nya join yang kita ambil pada saat on , itu yang diambil tabel yang memiliki relasi keduanya
+
+untuk pemilihan kolom yang akan kita tampilkan bisa kita atur sesuai kebutuhan (dalam contoh diatas adalah semua (*))
+dan untuk penamaan tabel dan kolom bisa kita gunakan alias (as) sesuai kebutuhan
+
+
+
+   //!contoh 2
+   //! contoh relasi dari tabel diatas
+ 
+ relasi nya sebagai berikut
+order relasi dengan orderdetail pada colum (order.id = orderdetail.idorder)
+product relasi dengan orderdetail pada colum (product.id = orderdetail.idproduct)
+
+
+kita akan queri select
+
+select * from order join orderdetail on (orderdetail.idorder = order.id) 
+                    join produck (produck.id = orderdetail.idproduct);
+
+artinya
+pilih semua dari tabel order yang melakukan join pada tabel orderdetail dengan colom (orderdetail.idorder = order.id) dan join yang melakukan tabel pada tabel produck dengan colum (produck.id = orderdetail.idproduct)
+
+
+
+//! kesimpulanya
+jika ingin melakukan many to many relasi kita memerlukan tabel sebagai jembatan untuk menghubungkan kedua tabel tersebut
+contoh
+tabel a ke b itu adalah one to many
+tabel c ke b itu adalah one to many
+secara tak langsung tabel c ke a adalah many to many
+
+
+bisa juga kita simpulkan many to many adalah dua tabel one to many yang di hubungkan oleh satu tabel;

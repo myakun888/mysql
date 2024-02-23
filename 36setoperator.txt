@@ -1,0 +1,65 @@
+//! set operator
+
+
+set operator adalah menggabungkan dua queri select dari tabel berbeda 
+ada banyak set operator diantaranya
+
+-union
+-union all
+-intersect
+-minus
+
+
+//! union
+
+union adalah gabungan dari hasil queri select diamana jika ada nilai yang duplikat maka yang duplikat akan dihapus
+
+cara melakukannya
+
+   //todo
+select email_a from tabel A 
+   union  
+select email_b from tabel B;
+#diatas bisa dibuat satu baris ini hanya contoh dibuat tiga baris
+
+mirip sperti select distinct yang akan otomatis menghapus data duplikat
+
+   select distinct email_a from tabel A union  select distinct email_b from tabel B;
+#ini hasilnya sama saja
+ untuk union ini secara default dia akan mendisctinc terlebih dahulu 
+
+
+
+ //! union all
+
+ jika union menghapus data duplikat , maka union all akan tetap menampilkan data duplikat , atau tidak menghapus data duplikat tersebut
+
+   //todo
+
+select email_a from tabela
+   union all
+select email_b from tabelb
+
+hasil nya semua data akan di tampilkan dari kedua tabel tersebut
+
+
+
+ //! intersect
+intersect adalah mengambil data dari dua hasil queri select yang di tampilkan adalah data yang dimilki oleh kedua tabel tersebut dan data nya tidak duplikat
+
+sayang ny mysql tidak memilki fitur ini tapi kita bisa akali dengan manual munggunakan inner join atau SUBQUERY
+
+contoh asumsi
+tabel tamu(email,id), tabel tamuvip (email)
+
+   dengan SUBQUERY
+   select distinct email from tamu where email in (select distinct email from tamuvip);
+
+   dengan innerjoin
+   select distinct email tamu.email from tamu inner join tamuvip on (tamu.email = tamuvip.email)
+
+//! MINUS 
+minus operasi dimana jika hasil dari queri pertama sama dengan queri kedua maka hasil dari queri pertama akan di hilangkan, di mysql tidak ada , tapi kita bisa gantikan dengan dengan join
+
+contoh
+select distinct tamu.email, tamu.nama from tamu left join tamuvip on (tamuvip.email = tamu.email) where tamuvip.email is null

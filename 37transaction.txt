@@ -1,0 +1,79 @@
+//! TRANSACTION 
+
+kenapa butuh transaction?
+saat kita membuat program kita jarang sekali melakukan satu aksi perinta 
+contoh aplikasi penjualan,
+saat ada proses penjulaan , didalam proses nya terdapat beberapa aksi yaitu 
+- memasukan barang ke data penjualan
+- lalu membuat detail transaksi
+- mengurangi stock yang di jual
+- dan lainya
+
+artinya dalam satu aksi kita melakukan beberapa perintah sekaligus , dan jika terjadi satu kesalahan maka semua perintah yang lain dibatalkan
+
+   contoh lain
+pada aplikasi transfer misal kita akan menansfer prosesnya yaitu
+-memasukan nominal transfer
+-memasukan nomor rek tujuan
+-proses mengirim
+
+dibelakang jika berhasil
+ini adalah proses satu kesatuan jika semua berhasil harusnya jumlah rekening pengirim berkurang dan jumlah rekening penerima bertambah
+
+bagaimana jika salah? jangan sampai saat kita batal mengirim tetapi jumlah rek pengirim masih berkurang
+
+inilah pentingnya transaction jika semua proses berjalan sukses maka semua sukses
+jika salah satu saja tidak berhasil maka semua proses dibatalkan di kembalikan seperti awal / di rollback
+sehingga data tetap konsisten
+
+   //! DATABASE TRANSACTION 
+database transaction adalah fitur di DBMS , dimana beberapa perintah diangap menjadi satu kesatuan perintah yang kita sebut transaction
+jika terdapat satu proses gagal di transaction maka secara otomatis semua perintah perintah sebelumnya dibatalkan
+jika sebuah transaction sukses maka semua perintah dipastikan sukses
+
+contoh alur ny
+start transaction ;  (ini wajib di eksekusi)
+   --> proses 1
+   --> proses 2
+   --> proses 3
+commit ;
+
+artinya
+setiap transaction selalu wajib diawali dengan start transaction itu menandakan transaction di mulai
+lalu setelah ny setiap queri diangap proses baik (insert,update,delete)
+kita anggap proses 1 itu insert, proses 2 itu insert, proses 3 update
+lalu di tutup dengan commit untuk semua proses di simpan di dalam database
+
+
+istilah-istilah dalam transaction
+1. start transaction -- > adalah perintah untuk menandakan bahwa proses transaction di mulai, lalu semua perintah setelahnya di sebut proses , akan di angap transaction ketika diakhiri dengan commit atau rollback;
+2. commit           ---> adalah perintah menyimpan semua proses transaction secara permanen
+3. rollback         ---> adalah perintah membatalkan secara permanen semua proses transaction / meng-undo semua kembali ke awal
+
+
+contoh lain saat menggunakan rollback
+contoh
+
+start transaction ;
+---> proses (proses ini kita delete) // tapi ternyata kita tidak ingin / tidak jadi mendelet
+            kita cukup lakukan rollback , untuk membatalkan semua atau meng-undo semua dari proses start transaction
+rollback;
+
+maka delete tadi tidak jadi , jadi lebih aman
+ //! tambahan
+ selain start transaction kita juga bisa menggunakan begin transaction atau untuk simpelny begin
+  contoh
+  begin transaction ;        --> untuk simpel ny cukup tulis begin;
+   --> proses 1
+   --> proses 2
+   --> proses 3
+commit;
+
+
+//! kapan kita memerlukan transaction?
+contoh seperti tadi untuk yang memerlukan data data yang konsisten dll
+
+
+//! yang tidak bisa dilakukan oleh transaction
+transaction tidak bisa dilakukan di operasi ddl (data defenisi language) seperti create database, merubah struktur tabel
+transaction hanya bisa untuk proses DML (data manipulasi language) seperti operasi insert, update dan delete

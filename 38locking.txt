@@ -1,0 +1,151 @@
+//! LOCKING
+
+
+sebelumnya kita sudah membahas transaction, secara default saat kita melakukan transaction kita juga melakukan locking?
+proses mengunci database dan akan di tampilkan update nya baik itu delete/insert/update setelah kita mengkahiri proses transaction dengan commit atau rollback
+
+contoh saat database dalam aplikasi penjualan stock barang berjumlah 1000, user pertama mebeli barang otomatis stock berkurang di database misal membeli barang 100 sisa 900, disaat bersaman user 2 ingin membeli barang dengan jumlah 1000, 
+database nya tidak akurat ini disebut race condisi, atau balapan dataupdate
+
+//! locking record 
+saat proses transaction dibelakang layar database otomatis database saat user 2 lock dan akan mendapatkan update hasil setelah user 1 pertama mengkahiri proses transaction (commit atau rollback) baru user 2 akan mendapatkan informasi database terbaru
+
+
+contoh
+kita asumsikan 2 user mengakses mysql
+user pertama melakukan transaction lalu input data maka data update yang tampil hanya di user pertama,
+di user kedua data belum tampil, ini karena proses locking dibelakang layar, data akan update terbaru jika user pertama selesai mealakukan commit / rollback , maka user kedua baru bisa melihat perubaghan nya 
+
+
+
+//! penjelasan
+
+saat kita melakukan proses transaction yang ditandai / diawali dengan start transaction atau begin;
+mysql akan melock database nya dan update data terbaru hanya di tampilkan di user tersebut, 
+ketika user telah selesai melakukan proses transaction dengan di tandai commit atau rollback
+baru data terbaru bisa di akses oleh user lain
+
+
+
+ //! locking record manual   atau locking manual untuk record atau baris
+
+selain locking otomatis kita juga bisa melakukan locking manual, 
+contoh saat kita ingin mengapudate stock , sebelum kita update stock kita akan melihat dlu dengan select, baru kita updte tambahkan, jika kita tak lock , contoh sisa stock 1000, kita ingin menambahkan 1 , ternyata di lain tempat user 2 mengurangi stock 2 jadi , karena user 2 lebih dahulu update yang tadinya ekpetasi user 1  setelah update data harus nya jumlah 1001, ternyata malah 999 karena lebih dulu di update oleh user 2,
+untuk menghindari ini kita bisa locking manual, sehingga user 2 menunggu data selesai update dari user 1, untuk menbuat konsistensi data tetap terjaga
+
+ini kita bisa lakukan dengan queri select for update, setelah select kita tambahkan for update, maka user lain yang ingin melakukan queri select ,update, delete atau select for update lagi, akan menunggu sampai kita selesai melakukan commit atau rollback transactiion
+
+
+//! caranya
+kita asumsikan memiliki tabel stock  dengan propert id int, jumlah int
+
+begin;
+select * from stock for update;              --> kita tambahkan kata for update
+update stock set jumlah = 100 where id =1;
+
+
+
+ditempat lain atau di user lain maka data yang akan update,delete atau select for update lagi akan di locking atau di tunggu hingga user 1 selesai melakukan transactiion;
+
+
+   //! Deadlock
+hati hati saat kita terlalu banyak proses transactiion kita perlu perhatikan jangan sampai terjadi deadlock,
+deadlock adalah proses saling tunggu antar satu sama lain saat kita melakukan locking manual
+sehingga proses ini saling tunggu tiada akhir hingga databse otomatis / mysql untuk di restart
+
+
+contoh
+
+user 1 melakukan select for udate untuk data id 1 (otomatis user 2 menunggu)
+user 2 melalukan select for update untuk data id 2 (otomatis user 1 menunggu)
+
+dan kedua user tersebut belum menyelesaikan proses transactiion (baik commit / rollback)
+maka deadlock akan terjadi ketika 
+user 1 melakukan select for update untul data id 2 yang sebelumnya sudah di lakukan oleh user 2,
+dan user 2 ketika melakukan select for update untuk data id 1 yang sebelumnya sudah di lakukan oleh user 1
+maka secara otomatis proses menunggu yang diluar batas artinya tidak berakhir hingga error / mysql akan meminta untuk merestart database;
+
+
+ simulasi koding nya
+  user1                                               user2
+  start transactiion;                                 start transactiion;
+  select * from data where id =1 for updade;          select * from data where id =2 for update;
+  select * from data where id =2 for updade;          select * from data where id =1 for updade;
+
+
+  //! kesimpulanya
+
+  deadlock akan terjadi ketika select for update pada data yang saling tunggu
+  jadi kita harus perhatikan dengan baik, jangan sampai deadlock / saling tunggu terjadi;\
+
+
+
+   //! locking tabel
+
+jika sebelumnya kita bisa melakukan locking record / baris , mysql juga bisa melakukan locking table
+jika melock tabel arti nya selama tabel itu di lock seleruh proses di tabel tersebut akan di lock,
+akan normal kembali setelah di unlock
+
+berikut cara lock
+locking tabel ada dua jenis mode 
+-read
+-write
+
+cara nya sebagai berikut
+//todo
+locking table nama_tabel jenislock
+
+locking table data read
+artinya kita melock tabel data dengan mode read
+
+locking table data write
+artinya kita melock tabel data dengan mode write
+
+
+arti dari modenya
+
+mode   user melock                           userlain
+read   hanya bisa read / lihat               user lain hanya bisa read tidak bisa write
+write  hanya bisa write dan read             tidak bisa read dan write
+
+penjelasan
+
+
+user 1 
+lock table data read
+artinya user 1 hanya bisa read/melihat data tabel tersebut , tetapi tidak bisa melakukan dml (insert,update,delete)
+lalu user lain pada proses ini juga sama hanya bisa melihat tida bisa write 
+
+
+user 1
+lock table data write
+artinya pada mode ini user 1 bisa melihat dan menulis atau dml(insert,update,deleet) sedangkan user lain  TIDAK BISA READ / MELIHAT DAN TIDAK BISA WRITE / MENULIS
+
+
+   setelah kita selesai  atau untuk membuka ny kita unlock
+//todo
+ unlock table;
+artinya table di buka kembali
+
+//! LOCKING INSTANCE / locking database
+
+locking INSTANCE adalah dimana ketika lock ini dilakukan makan seluruh perintah ddl/data defenisi language (create,alter,drop)
+akan di tahan hingga proses locking instance selesai , tetapi untuk proses dml / data manipulasi language (inser, update, delete)
+
+locking instance ini gunakan biasanya ketika kita ingin membackup data dari tabel nya, sehingga user lain ketika ingin melakukan proses mengubah struktur tabel / ddl di database 
+akan di suruh menunggu hingga proses backup selesai dan locking instance di buka kembali
+
+ melakukan locking instance
+
+
+//todo 
+lock instance for backup;          ---> ini queri u/ mysql
+backup lock nama_tabel;            ---> ini queri myaql mariadb
+
+untuk membuka nya
+//todo
+unlock instance;                   ---> ini queri u/ mysql 
+backup unlock ;                    ---> ini queri mysql mariadb
+
+      //! penting
+ada perbedaan queri dari mysql dan mysql-mariadb, pilih sesuai database yang kalian gunakan, tapi fungsi nya sama

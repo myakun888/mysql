@@ -1,0 +1,61 @@
+//! Jenis-jenis join
+sebelumnya kita sudah bahas apa itu join
+kali ini kita akan membahas jenis-jenis join pada mysql
+diantar nya
+-inner join
+-left join
+-right join
+- cross join
+
+
+   //! inner join
+
+saat kita melakukan queri select dengan join
+contoh
+select * from tabela join tabelb on (tabela.id = tabelb.id)
+
+itu termasuk adalah inner join, karena secara default saat kita melakukan join itu termasuk inner join
+   cara melakukan inner join
+
+   inner join adalah mengambil nilai yang saling berisian antar kedua tabel / artinya diakan menampilkan tabel/nilai yang memiliki hubungan dari kedua tabel tersebut, jika tidak ada hungan atau relasi maka tidak ada colum/ nilai yang ditampilkan
+
+select * from tabela INNER JOIN tabelb on (tabela.id = tabelb.id);
+
+hasil kedua contoh diatas sama
+
+
+
+   //! LEFT JOIN
+
+   adalah menampilkan atau mengambil nilai dari kedua tabel yang memilki relasi dan juga menampilkan semua nilai pada tabel di sebelah kiri, untuk nilai yang memilki relasi akan di tampilkan sesuai nilainya dan untuk nilai yang dari tebel sebelah kiri tidak memilki relasi akan di tampilkan juga tetapi nilainya adalah null
+
+   cara left join
+
+   select * from tabela left join tabelb (tabela.id = tabelb.id);
+
+
+   //! RIGHT JOIN
+   mirip seperti left hanya saja untuk right dia selain menampilkan nilai yang memilki relasi , dia juga akan menampilkan semua isi kolom pada tabel yang di sebelah kanan, untuk tabel di sebelah kanan yang tidak memilki relasi akan menampilkan nilai null
+
+
+   cara right join
+
+   select * from tabela righ join tabelb (tabela.id = tabelb.id);
+
+
+   //! CROSS JOIN
+
+   cross join adalah queri untuk menampilkan relasi dari dua tabel , tetapi akan di kalikan sesuai isi dari tabel
+   cross join ini jarang di gunakan , saya juga jarang menggunakan ini
+   contoh di tabel a memilki data 1-5, dan data b memilki nilai a-e maka hasilnya adalah
+   1a, 2a, 3a, 4a ,5a
+   1b, 2b, 3b, 4b ,5b dst
+
+   atau juga seperti perkalian
+
+   perkalian data nya sesuai jumlah datanya
+   perkalian ini bukan berarti perkalian matematika
+
+   cara melakukan cross join
+   
+   select * from tabela cross join tabelb on (tabela.id = tabelb.id);

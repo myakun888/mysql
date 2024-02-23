@@ -1,0 +1,43 @@
+//! SUBQUERY
+
+dimysql mendukung pencarian data menggunakan where dari hasil select queri , ini di sebut SUBQUERY
+
+contoh untuk mencari rata-rata sebuah nilai pada kolom,biasanya kita pasti akan melakukan agregate terlebih dahulu
+select avg(nilai) from tabel a
+hasil dari select queri ini kita ambil misal hasil nya adalah 10
+
+lalu jika kita ingin mencari nilai yang lebih besar dari nilai rata rata yang kita cari sebelumnya (dalam hal ini 10)
+kita akan queri lagi dengan select
+select * from tabel b where nilai > 10
+
+ini sama saja kita melakukan 2x queri yang pertama mencari rata-rata dengan avg(), kedua di queri lagi dengan select dan where
+
+   dengan SUBQUERY kita tidak harus melakukan 2x, kita bisa langsung melakukan di satu baris queri
+//! SUBQUERY di where
+kita akan menggunakan SUBQUERY pada where
+//todo
+
+select * from tabel a where nilai < (select avg(nilai) from tabel b)
+
+artinya
+select semua nilai dari tabel a dengan kondisi lebih besar dari rata rata nilai dari colom b,
+
+
+jadi kita bisa menggunakan tanda kurung () lalu di dalam nya kita masukan perintah select
+
+   selain where bisa juga kita menggunakan SUBQUERY di dalam from
+
+
+   //! SUBQUERY di dalam from
+
+selain SUBQUERY di dalam where , SUBQUERY juga bisa di lakukan di dalam form
+
+contoh kita akan mencari nilai max dari suatu tabel yang memilki join
+
+select max(nilai) from (
+                        select nilai from tabela 
+                        join tabelb (tabela.id = tabelb.id)
+                        )
+
+
+perbedaanya hanya di dalam kurung nya, jika select queri nya id dalam select , jika where di dalam where

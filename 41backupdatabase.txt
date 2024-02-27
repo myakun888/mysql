@@ -1,0 +1,23 @@
+//! BACKUP DATABASE
+
+sangat penting bagi kita untuk selalu membackup database secara berkala, agar database tidak hilang, atau jika hilang kita ada copiannya
+
+mysql mendukung untuk backup database , untuk backup ny tidak menggunakan queri mysql , tetapi mysql memiliki apliksi bawaan
+untuk membackup nya yaitu 'mysqldump' 
+mysqldump ini apliksi yang berbasis terminal
+
+biasaya berada di dalam folder bin mysql nya
+
+
+dicontoh ini kita hanya mencontohkan backup biasa , karena mysql banyak macam-macam backup silahkan lihat dokumentasinya
+
+cara nya
+//todo
+
+
+mysqldump namadatabes --user nama_user --password --result-file=/lokasipath/namafile.sql
+
+contoh
+mysqldump datakantor --user root --password --result-file=/user/desktop/backupfile/backup_datakantor.sql;
+
+note : ketika diminta password masukan paswordnya. sebenarnya bisa langsung dimasukan pada baris diatas tapi akan terlihat, jadi cukup tulis password saja agar diminta secara terpisah

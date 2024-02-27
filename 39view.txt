@@ -1,0 +1,68 @@
+//! view
+
+kadang kita saat membuat tabel itu banyak sekali atribute kita kadang hanya memerlukan beberapa atribut untuk di tampilkan
+dari sebuah tabel tersebut, dan itu agak sedkit membuat kita bekerja 2 x
+
+di mysql ada fitur view 
+view ini adalah seperti virtual tabel, jadi kita bisa melakuan dml (data manipulasi language) seperti select 
+
+kelebihannya
+kita bisa menambahkan data, menampilkan data dari tabel yang berasal dari tabel aslinya
+ini bisa menjadi pemintas saat kita melakukan queri yang hanya menanpilkan colm tertentu
+ini sebenarnya mirip atau bisa di lakukan dengan select biasa
+
+tapi keungulaninya tabel virtual nya ini kita bisa pangil, update dan kita
+untuk isi nya juga sama dengan tabel asli nya
+
+-selain itu view juga bisa mengambil dari lebih dari satu tabel
+- bisa juga untuk join
+   //! membuat view
+
+//todo
+create view nama_view as perintahnya from nama_tabel
+
+kita asumsikan memilki nama tabel data dan colum nya id,email,nama
+
+contoh
+create view datax as select id, email from data
+artinya
+kita membuat view dengan nama datax dengan alias perintahnya nya mengambil id,email dari tabel data
+
+//! melihat view
+hasil dari kita membuat view, maka tabel nya akan tampil di tabel database kita,
+jadi untuk melihat tabel, dan melihat isi tabel sama seperti biasa
+
+   show tables ;
+
+//! melihat isi dari view tertentu
+
+select * from nama_view;       -- > sama seperti melihat tabel
+
+
+//! mengubah view
+//todo
+create or replace nama_view as perintahnya from nama_tabel
+
+perlu di ingat ini akan menimpa perintah yang kita buat sebelumnya
+
+
+//! sifat view
+meskipun view ini adalah virtual dari sebuah tabel yang kita ambil, tapi isi nya adalah sama
+jadi jika kita melakukan perubahan di tabel utama dengan perintah (update atau delete) maka isi dari tabel virtual nya juga berubah, begitupun jika isi dari view tabel nya kita ubah data di tabel asli juga berubah
+
+//! menghapus view
+
+//todo 
+drop view nama_view;
+
+contoh
+drop view datax;
+artinya kita menghapus view dengan nama datax
+
+
+   //! kapan mengunakan view?
+
+ini sesuai keperluan, karena view mirip sepeti queri select,
+tapi kelebihannya nya dia membuat tabel virtual sesuai yang kita buat
+best practice nya biasa saat tabel yang memiliki banyak kolom dan kita sering / jika kita ingin memangil colum tertentu ( hanya yang kita perlukan ) biasanya kita membuat view sebagai pemintas
+

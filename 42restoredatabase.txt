@@ -1,0 +1,54 @@
+//! RESTORE DATABASE
+
+dimateri ini kita hanya mendemokan cara melalui comandpromp /cmd
+backup dan restore tentunya juga bisa dengan aplikasi client berbasi gui(grapik user interface) sepertin mysql workbench, phpmyadmin dll
+setelah kita backup kita ingin mengembalikan atau menampilkan database yang sudah kita backup sebelumnya
+
+proses mengembalikan database dari hasil backup di sebut restore database
+
+mysql memilki 2 cara untuk merestore 
+
+1. dengan aplikasi client berbasis cmd (terminal)
+2. dengan queri dari mysql itu sendiri
+
+
+cara 1
+dengan terminal
+//todo
+ -pastikan kita sudah membuat database yang akan kita restore (dalam hal ini nama database nya 'database_baru') , lalu kita lakuna perintah di terminal sebagai berikut:
+
+mysql --user=nama_user --password namadatabase < path lokasi file hasil backup
+
+contoh
+mysql --user =root --password database_baru < /user/os/desktop/backup/akun.sql  
+
+(nanti akan di minta password masukan password)
+
+artinya
+mysql dengan user root dengan nama database database_baru < dengan databackup dari lokasiu user/os/desktop/backup/akun.sql
+nama file backup nya adalah akun.sql
+
+untuk memastikan nya silahkan login mysql lalu cek
+
+
+cara 2
+dengan queri dari mysql yaitu source
+
+contoh
+source lokasi_file path nya
+
+pastikan kita sudah membuat database ny
+
+//todo
+- masuk dalam mysql ny
+- pilih datbase nya,
+
+source /users/os/desktop/backup/akun.sql
+
+artinya
+perintah source masuke ke path /user/os/desktop/backup/akun.sql
+dimana kita menyimpan file backupnya
+
+
+
+silahkan pilih dari kedua cara diatas

@@ -1,0 +1,112 @@
+//! USER MANAGEMENT
+
+disclaimer : materi user MANAGEMENT banyak,disini kita hanya membahas beberapa diantranya membuat dan menghapus user, hak aksess dll, untuk lebih detail silahkan kunjungi dokumentasi nya
+
+
+   secara default mysql membuat satu user super administrator yaitu root,
+dimana user ini bisa mengakses semua database dan memiliki full hak akses terhadap semua database
+
+dalam membuat applikasi baiknya satu applikasi satu user, artinya aplikasi tersebut hanya bisa mengakses database yang berhubungan dengan applikasi nya
+dan kita juga baiknya membuat khusus user untuk setiap database, dan beserta hak aksesnya
+misal nya hanya bisa untuk select, update , delete,
+atau hanya bisa select dan lain lain sesuai kebutuhan
+
+
+   didalam user MANAGEMENT , kita mengenal istilah hak akses
+hak akses hak dari suatu user tersebut terhadap database yang dimilkinya, misal nya hak untuk membuat / menghapus tabel, menmabah dan menghapus data, dll tergantung hak akses yang di berikan kepada user tersebut
+hak akses banyak sekali silahkan lihat dokumentasi nya
+
+//! membuat user
+   //todo
+CREATE USER 'nama_user' @ 'jalur_akses';
+
+create user 'muhamamd' @ '%';
+
+artinya 
+kita membuat user dengan nama 'muhammad' dan bisa diakses dari semua jalur
+
+create user 'tamu' @ '192.168.123';
+artinya
+kita membuat user dengan nama 'tamu' dan hanya bisa diakse dari ip tersebut
+
+
+jenis jalur   arti
+'%'           bisa diakses dari semua jalur baik local host, atau dengan ip address
+'localhost'   hanya bisa diakses dari localhost / komputer yang memilki database ny
+'ip tertentu' kita bisa isikan ip (internet protocol) artinya kita hanya bisa mengakses dari ip tersebut
+
+
+
+   //! menghapus user
+   drop user 'nama_user'@'jalur_akses';
+drop user 'tamu'@'localhost';
+
+
+
+//! menambah dan menghapus hak akses
+
+setelah kita membuat user kita akan memberikan hak akses ke user nya
+kita bisa menentukan jenis hak akses yang akan kita berikan ke user tersebut
+untuk menambah gunakan kata kunci grant
+untuk menghapus gunakan kata kunci revoke
+
+//todo
+grant jenis_hakaskes on namadatabse.tabel to 'nama_user'@'jalur_akses';
+ contoh
+
+dalam kasus ini kita sebelumnya sudah membuat user dengan nama 'tamu' dan jalur ny localhost
+
+contoh 1
+grants select on datakantor.* to 'tamu'@'localhost';
+
+artinya kita memberi akses select di databse kantor untuk semua tabel (*) pada user tamu di jalur localhost
+ jika hanya tabel tertentu ganti * dengan nama tabel nya contoh
+ datakantor.nama
+
+
+contoh 2
+
+grants select, insert, update, delete on datakantor.* 'tamu'@'localhost';
+artinya
+kita memberikan akses select, insert, update, delete pada database datakantor dengan semua tabel (*) pada user 'tamu' di jalur 'localhost'
+
+
+
+
+   //!   melihat hak akses apa saja yang di dapat / dimililki;
+
+//todo
+
+show grants 'nama_user'@'jalur_akses'
+contoh
+show grants 'tamu'@'localhost';
+
+
+
+ //! menghapus hak akses
+
+//todo
+revoke jenis_hakaskes on namadatabse.tabel from 'nama_user'@'jalur_akses';
+
+contoh 1
+revoke select on data.* from 'tamu'@'localhost';
+artinya hapus select dari database data dengan tabel semua (*) dari user 'tamu' dan jalur_akses 'localhost';
+note: jika hanya tabel tertentu tulis namadatabse.nama_tabel , contoh data.username artiny namadatabse nya data , nama tabel ny username
+
+contoh
+revoke select, insert, update on data.* from 'tamu'@'localhost';
+artinya hapus select, insert, update dari database data dengan tabel semua (*) dari user 'tamu' dan jalur_akses 'localhost';
+
+
+//! set password
+
+jika sebelumnya kita sudah menyeting username dan memberikan hak akses
+kita juga bisa memberikan password kepada user agar tidak
+
+//todo
+SET PASSWORD FOR 'nama_user'@'jalur_akses' = 'paswordnya'   ---> ini cara mysql
+SET PASSWORD FOR 'nama_user'@'jalur_akses' = password (paswordnya)  --> ini cara mysql mariadb
+
+contoh
+set password for 'mrx'@'localhost' = 'bismillah'; --> ini cara mysql
+set password for 'mrx'@'localhost' = password('bismillah') --> ini cara mysql mariadb;
